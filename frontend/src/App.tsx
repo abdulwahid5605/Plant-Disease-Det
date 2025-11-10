@@ -3,14 +3,16 @@ import Register from "./pages/LoginRegister";
 import Navbar from "./components/ui/navbar";
 import Footer from "./components/ui/footer";
 import { Toaster } from "./components/ui/toaster";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Toaster /> 
+      <Toaster />
       <Routes>
         <Route path="/" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
     </BrowserRouter>
