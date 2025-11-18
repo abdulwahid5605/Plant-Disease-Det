@@ -19,3 +19,9 @@ export function registerUser(data: RegisterPayload) {
 export function loginUser(data: LoginPayload) {
   return axios.post(`${API}/login`, data).then((res) => res.data);
 }
+
+export function verifyOtp(email: string, otp: string) {
+  return axios
+    .post(`${API}/verify-otp`, { email, otp })
+    .then((res) => res.data);
+}

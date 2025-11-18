@@ -19,6 +19,13 @@ export class AuthController {
   @Post('login')
   async login(@Body() body: any) {
     const user = await this.authService.validateUser(body.email, body.password);
-    return this.authService.login(user);
+    const otp = await this.authService.generateOtpForUser(user._id);
+    console.log("OTP for login:", otp);
+    return { message: 'OTP sent to your email/phone.' };
+  }
+
+  @Post('verify-otp')
+  async verifyOtp(@Body() body: any) {
+    return this.authService.verifyOtp(body.email, body.otp);
   }
 }

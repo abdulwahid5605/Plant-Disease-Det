@@ -12,6 +12,12 @@ export class User {
 
   @Prop({ required: true })
   password: string;
+
+  @Prop()
+  otp: string; 
+
+  @Prop()
+  otpExpiresAt: Date;
 }
-// SchemaFactory used to create mongoose schema here
+
 export const UserSchema = SchemaFactory.createForClass(User);
