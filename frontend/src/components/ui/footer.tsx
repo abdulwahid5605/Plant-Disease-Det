@@ -8,10 +8,11 @@ export default function Footer() {
       px={6}
       py={6}
       boxShadow="inner"
-      position="fixed"     
+      // position="fixed"     
       bottom={0}           
       width="100%"         
       zIndex={10}          
+      marginTop={4}
     >
       <Flex
         maxW="1200px"

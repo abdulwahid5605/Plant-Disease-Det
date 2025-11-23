@@ -11,7 +11,7 @@ import { LuMoon } from "react-icons/lu";
 
 export default function Navbar() {
   return (
-    <Box bg="green.800" color="white" px={6} py={4} boxShadow="md">
+    <Box bg="green.800" color="white" px={6} py={4} boxShadow="md" marginBottom={4}>
       <Flex maxW="1200px" mx="auto" alignItems="center">
         {/* Logo / Brand */}
         <Text fontSize="xl" fontWeight="bold">
