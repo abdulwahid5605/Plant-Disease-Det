@@ -13,6 +13,8 @@ import {
     Image,
 } from "@chakra-ui/react";
 import { toaster } from "../components/ui/toaster";
+import TextInput from "../components/ui/TextInput";
+import TextAreaInput from "../components/ui/TextAreaInput";
 
 export default function ContactForm() {
     const [name, setName] = useState<string>("");
@@ -20,7 +22,7 @@ export default function ContactForm() {
     const [subject, setSubject] = useState<string>("");
     const [message, setMessage] = useState<string>("");
 
-    const GOOGLE_SHEET_URL: string = "PASTE_YOUR_GOOGLE_WEB_APP_URL_HERE";
+    const GOOGLE_SHEET_URL: string = "https://script.google.com/macros/s/AKfycbz_BPwMa6IrGYmd8AHjVChTri3kuOvHdGCpjTDgH0cXtDf78qmT6fL0J_RKdQ1SPC34/exec";
 
     const handleSubmit = async () => {
         if (!name || !email || !message) {
@@ -67,16 +69,26 @@ export default function ContactForm() {
             height="100vh"
             bg="gray.50"
             direction={["column", "column", "row"]}
-            padding={10}
+            padding={[4, 16]}
         >
             {/* LEFT IMAGE */}
-            <Box flex="1" display={["none", "none", "block"]}>
+            <Box position="relative" flex="1" display={["none", "none", "block"]}                   
+            borderTopLeftRadius="lg" borderBottomLeftRadius="lg" overflow="hidden">
                 <Image
-                    src="/contact-form.jpg"
+                    src="/plant-disease-contactus.jpeg"
                     alt="Plant"
                     w="100%"
                     h="100%"
                     objectFit="cover"
+
+                />
+                <Box
+                    position="absolute"
+                    top={0}
+                    left={0}
+                    w="100%"
+                    h="100%"
+                    bg="linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4))"
                 />
             </Box>
 
@@ -85,15 +97,17 @@ export default function ContactForm() {
                 flex="1"
                 align="center"
                 justify="center"
-                bg="white"
-                boxShadow={["none", "none", "lg"]}
+                boxShadow="0 4px 20px rgba(0,0,0,0.3)"
+                borderTopRadius="lg"
+                borderBottomRightRadius="lg"
+                p={[4, 8]}
             >
                 <Box
                     w="90%"
                     maxW="500px"
-                    h={["auto", "auto", "100%"]} 
-                    p={6}
-                    borderRadius="lg"
+                    h={["auto", "auto", "100%"]}
+                    p={[0, 4]}
+                    // borderRadius="lg"
                     display="flex"
                     flexDirection="column"
                     justifyContent="center"
@@ -104,10 +118,8 @@ export default function ContactForm() {
 
                     <VStack gap={4} flex="1">
                         <Box width="100%">
-                            <Text mb={1} fontSize="sm">
-                                Full Name
-                            </Text>
-                            <Input
+                            <TextInput
+                                label="Full Name"
                                 placeholder="Your Name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -115,11 +127,8 @@ export default function ContactForm() {
                         </Box>
 
                         <Box width="100%">
-                            <Text mb={1} fontSize="sm">
-                                Email Address
-                            </Text>
-                            <Input
-                                type="email"
+                            <TextInput
+                                label="Email Address"
                                 placeholder="yourname@example.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -127,10 +136,8 @@ export default function ContactForm() {
                         </Box>
 
                         <Box width="100%">
-                            <Text mb={1} fontSize="sm">
-                                Subject
-                            </Text>
-                            <Input
+                            <TextInput
+                                label="Subject"
                                 placeholder="Topic (optional)"
                                 value={subject}
                                 onChange={(e) => setSubject(e.target.value)}
@@ -138,18 +145,22 @@ export default function ContactForm() {
                         </Box>
 
                         <Box width="100%" flex="1">
-                            <Text mb={1} fontSize="sm">
-                                Message
-                            </Text>
-                            <Textarea
+                            <TextAreaInput
+                                label="Message"
                                 placeholder="Write your message here..."
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                h="100%" 
                             />
+
                         </Box>
 
-                        <Button width="100%" colorScheme="teal" onClick={handleSubmit}>
+                        <Button
+                            width="100%"
+                            colorScheme="teal"
+                            size="lg"
+                            _hover={{ bg: "teal.600" }}
+                            onClick={handleSubmit}
+                        >
                             Send Message
                         </Button>
                     </VStack>
