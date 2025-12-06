@@ -5,6 +5,8 @@ import Footer from "./components/ui/footer";
 import { Toaster } from "./components/ui/toaster";
 import Dashboard from "./pages/Dashboard";
 import ContactForm from "./pages/ContactForm";
+import GuestRoute from "./components/ui/GuestRoute";
+import ProtectedRoute from "./components/ui/ProtectedRoute";
 
 export default function App() {
   return (
@@ -12,9 +14,21 @@ export default function App() {
       <Navbar />
       <Toaster />
       <Routes>
-        <Route path="/" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/contact" element={<ContactForm />} />
+        <Route path="/" element={
+          <GuestRoute>
+            <Register />
+          </GuestRoute>}
+        />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/contact" element={
+          <ProtectedRoute>
+            <ContactForm />
+          </ProtectedRoute>
+        } />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -67,7 +67,7 @@ export default function AuthPage() {
         description: "Redirecting to dashboard...",
         type: "success",
       });
-
+      setOtp("");
       setIsOtpStep(true);
 
       toaster.update(toastId, {
@@ -185,6 +185,8 @@ export default function AuthPage() {
                 </Heading>
                 <VStack gap={4}>
                   <Input
+                    autoComplete="one-time-code"
+                    inputMode="numeric"
                     placeholder="Enter 6-digit OTP"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
