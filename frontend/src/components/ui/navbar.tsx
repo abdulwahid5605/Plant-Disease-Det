@@ -2,59 +2,95 @@ import {
   Box,
   Flex,
   HStack,
-  IconButton,
   Text,
   Link as ChakraLink,
-  Spacer,
+  Avatar,
+  Menu,
+  Portal,
+  Button,
 } from "@chakra-ui/react";
-import { LuMoon } from "react-icons/lu";
+import { LuMoon, LuSun, LuLogOut } from "react-icons/lu";
+import { Link } from "react-router-dom";
+import "../../styles/Navbar.css"
+
 
 export default function Navbar() {
   return (
-    <Box bg="green.800" color="white" px={6} py={4} boxShadow="md" marginBottom={4}>
+    <Box bg="green.900" color="white" px={6} py={4} boxShadow="md">
       <Flex maxW="1200px" mx="auto" alignItems="center">
         {/* Logo / Brand */}
         <Text fontSize="xl" fontWeight="bold">
           PlantApp
         </Text>
 
-         <Flex flex={1} justifyContent="center">
-          <HStack gap={12}> 
-            <ChakraLink
-              href="/"
-              color="white"
-              fontWeight="medium"
-              _hover={{ color: "green.300", transition: "color 0.3s ease" }}
+        <Flex flex={1} justifyContent="center">
+          <HStack gap={12}>
+            <Link
+              to="/"
+              className="nav-link"
             >
               Home
-            </ChakraLink>
-            <ChakraLink
-              href="/about"
-              color="white"
-              fontWeight="medium"
-              _hover={{ color: "green.300", transition: "color 0.3s ease" }}
+            </Link>
+
+            <Link
+              to="/about"
+              className="nav-link"
             >
               About Us
-            </ChakraLink>
-            <ChakraLink
-              href="/contact"
-              color="white"
-              fontWeight="medium"
-              _hover={{ color: "green.300", transition: "color 0.3s ease" }}
+            </Link>
+
+            <Link
+              to="/contact"
+              className="nav-link"
             >
               Contact
-            </ChakraLink>
+            </Link>
+            <Link
+              to="/articles"
+              className="nav-link"
+            >
+              Articles
+            </Link>
           </HStack>
         </Flex>
+        <Menu.Root>
+          <Menu.Trigger asChild>
+            <Button variant="plain">
+              <Avatar.Root cursor="pointer" size="sm">
+                <Avatar.Image src="https://bit.ly/sage-adebayo" />
+                <Avatar.Fallback name="User" />
+              </Avatar.Root>
+            </Button>
 
-        <IconButton
-          aria-label="Dark mode icon"
-          variant="ghost"
-          color="white"
-          _hover={{ bg: "green.700", transition: "background 0.3s ease" }}
-        >
-          <LuMoon />
-        </IconButton>
+          </Menu.Trigger>
+
+          <Portal>
+            <Menu.Positioner>
+              <Menu.Content>
+                {/* <Menu.Item
+                  value="theme"
+                  onClick={toggleColorMode}
+                >
+                  {colorMode === "light" ? (
+                    <>
+                      <LuMoon /> Dark Mode
+                    </>
+                  ) : (
+                    <>
+                      <LuSun /> Light Mode
+                    </>
+                  )}
+                </Menu.Item> */}
+
+                <Menu.Item value="logout" color="red.500">
+                  <LuLogOut /> Logout
+                </Menu.Item>
+              </Menu.Content>
+            </Menu.Positioner>
+          </Portal>
+        </Menu.Root>
+
+
       </Flex>
     </Box>
   );

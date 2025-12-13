@@ -7,6 +7,9 @@ import Dashboard from "./pages/Dashboard";
 import ContactForm from "./pages/ContactForm";
 import GuestRoute from "./components/ui/GuestRoute";
 import ProtectedRoute from "./components/ui/ProtectedRoute";
+import ArticlesPage from "./pages/Articles";
+import ArticleDetail from "./pages/AcountDetail";
+import AboutUs from "./pages/AboutUs";
 
 export default function App() {
   return (
@@ -24,11 +27,27 @@ export default function App() {
             <Dashboard />
           </ProtectedRoute>
         } />
+        <Route path="/about" element={
+          <ProtectedRoute>
+            <AboutUs />
+          </ProtectedRoute>
+        } />
         <Route path="/contact" element={
           <ProtectedRoute>
             <ContactForm />
           </ProtectedRoute>
         } />
+        <Route path="/articles" element={
+          <ProtectedRoute>
+            <ArticlesPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/articles/:id" element={
+          <ProtectedRoute>
+            <ArticleDetail />
+          </ProtectedRoute>
+        } />
+
       </Routes>
       <Footer />
     </BrowserRouter>
