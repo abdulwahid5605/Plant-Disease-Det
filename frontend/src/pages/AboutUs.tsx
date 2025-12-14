@@ -6,37 +6,11 @@ import {
     SimpleGrid,
     Button,
     Icon,
-    Span,
 } from "@chakra-ui/react";
-import { LuLeaf, LuUsers, LuBook, LuPhone } from "react-icons/lu";
-import { Accordion, Avatar } from "@chakra-ui/react";
-import { GiWaterDrop } from "react-icons/gi";
-import { MdHistoryEdu } from "react-icons/md";
-import { FaHeart, FaUsers } from "react-icons/fa";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { RiBookLine } from "react-icons/ri";
-import { BiBookContent } from "react-icons/bi"
+import { Accordion } from "@chakra-ui/react";
+import data from "../../data.tsx"
 
 export default function AboutUs() {
-    // FAQ items
-    const faqItems = [
-        {
-            value: "a",
-            title: "How accurate is the AI disease detection?",
-            text: "Our AI model provides high-accuracy results with detailed information about plant diseases.",
-        },
-        {
-            value: "b",
-            title: "How do I post a plant in the marketplace?",
-            text: "Simply login, go to the marketplace section, click 'Add Plant', and fill in the details.",
-        },
-        {
-            value: "c",
-            title: "Can I contact the seller directly?",
-            text: "Yes, you can see the seller's contact information and reach them directly through the app.",
-        },
-    ];
-
     // Team members
     const team = [
         { name: "Ali Khan", role: "Founder & CEO", src: "https://ricimelion.pk/cdn/shop/files/AldericThreePieceSuit.webp?v=1737306793" },
@@ -56,6 +30,7 @@ export default function AboutUs() {
                 bgSize="cover"
                 bgRepeat="no-repeat"
                 css={{ clipPath: "polygon(0 0, 100% 0, 100% 56%, 0% 100%)" }}
+                // mb={20}
             >
                 <Box
                     position="absolute"
@@ -107,78 +82,75 @@ export default function AboutUs() {
                 </Flex>
             </Flex>
 
+            <Box mb={20} >
+                <Box
+                    bg="green.100"
+                    borderRadius="none"
+                    shadow="xl"
+                    overflow="hidden"
+                >
+                    <Flex
+                        direction={{ base: "column", md: "row" }}
+                        align="stretch"
+                    >
+                        <Flex
+                            flex="1"
+                            direction="column"
+                            justify="center"
+                            p={{ base: 6, md: 12 }}
+                        >
+                            <Heading mb={4}>
+                                Who We Are
+                            </Heading>
+                            <Text fontSize="lg" color="gray.600" mb={4}>
+                                PlantApp is a smart agriculture platform designed to help plant owners,
+                                farmers, and gardeners detect plant diseases using AI-powered image
+                                analysis.
+                            </Text>
+
+                            <Text fontSize="md" color="gray.600">
+                                Our platform not only provides instant disease detection results but
+                                also connects users with a trusted plant marketplace, educational
+                                articles, and a supportive community focused on sustainable plant care.
+                            </Text>
+                        </Flex>
+                        <Box
+                            flex="1"
+                            minH={{ base: "300px", md: "70vh" }}
+                            bgImage="url('/vision.jpg')"
+                            bgSize="cover"
+                        />
+                    </Flex>
+                </Box>
+            </Box>
+
             <Box mb={16} px={8}>
                 <Heading mb={6} textAlign="center">
                     Our Features
                 </Heading>
                 <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap={8}>
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={LuLeaf} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>AI Disease Detection</Heading>
-                        <Text>Upload a plant image and get instant disease detection results.</Text>
-                    </Box>
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={LuUsers} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Marketplace</Heading>
-                        <Text>Buy and sell plants, contact sellers directly, and explore listings.</Text>
-                    </Box>
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={LuBook} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Articles</Heading>
-                        <Text>Read articles about plant care, disease prevention, and tips.</Text>
-                    </Box>
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={LuPhone} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Contact Us</Heading>
-                        <Text>Reach out to us through the contact form for support or inquiries.</Text>
-                    </Box>
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={GiWaterDrop} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Plant Care Tips</Heading>
-                        <Text>Get daily guidance on watering, sunlight, and soil requirements for different plants.</Text>
-                    </Box>
-
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={MdHistoryEdu} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Disease History</Heading>
-                        <Text>Track the health of your plants over time and view past disease detections.</Text>
-                    </Box>
-
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={FaHeart} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Marketplace Favorites</Heading>
-                        <Text>Save listings of plants you like for easy access and faster transactions later.</Text>
-                    </Box>
-
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={IoNotificationsOutline} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Notifications</Heading>
-                        <Text>Receive alerts for messages, new listings, and important updates in the app.</Text>
-                    </Box>
-
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={LuLeaf} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>AI Suggestions</Heading>
-                        <Text>Get recommended plants based on your garden type, climate, and preferences.</Text>
-                    </Box>
-
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={FaUsers} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Community Forum</Heading>
-                        <Text>Discuss plant care issues, ask questions, and share experiences with other users.</Text>
-                    </Box>
-
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={RiBookLine} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Plant Journal</Heading>
-                        <Text>Maintain a log for each plant: watering, growth, fertilization, and disease treatments.</Text>
-                    </Box>
-
-                    <Box p={6} bg="white" borderRadius="md" shadow="md" textAlign="center">
-                        <Icon as={BiBookContent} w={10} h={10} color="green.500" mb={4} />
-                        <Heading size="md" mb={2}>Tutorials & Guides</Heading>
-                        <Text>Follow step-by-step guides for planting, disease management, and seasonal care tips.</Text>
-                    </Box>
+                    {data.features.map((feature) => (
+                        <Box
+                            key={feature.id}
+                            p={6}
+                            bg="white"
+                            borderRadius="md"
+                            shadow="md"
+                            textAlign="center"
+                        >
+                            <Icon
+                                as={feature.icon}
+                                w={10}
+                                h={10}
+                                color="green.500"
+                                mb={4}
+                            />
+                            <Heading size="md" mb={2}>
+                                {feature.title}
+                            </Heading>
+                            <Text>{feature.description}</Text>
+                        </Box>
+                    ))}
                 </SimpleGrid>
             </Box>
 
@@ -220,7 +192,7 @@ export default function AboutUs() {
                 <Flex direction={{ base: "column", md: "row" }} gap={8} borderRadius="md" shadow="xl" p={8} bg="white">
                     <Box flex={1}>
                         <Accordion.Root collapsible defaultValue={["b"]} gap={4}>
-                            {faqItems.map((item, idx) => (
+                            {data.faqItems.map((item, idx) => (
                                 <Accordion.Item key={idx} value={item.value}>
                                     <Accordion.ItemTrigger>
                                         <Accordion.ItemTrigger>
@@ -233,7 +205,7 @@ export default function AboutUs() {
                                                 _hover={{ shadow: "md", bg: "green.100" }}
                                                 transition="all 0.2s"
                                                 minW="100%"
-                                                justify="space-between"  
+                                                justify="space-between"
                                             >
                                                 <Text fontWeight="semibold" color="green.900">
                                                     {item.title}

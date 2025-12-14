@@ -7,7 +7,7 @@ import {
     Button,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import articles from "../../data.tsx"
+import data from "../../data.tsx"
 
 
 export default function ArticlesPage() {
@@ -18,7 +18,7 @@ export default function ArticlesPage() {
             </Heading>
 
             <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={8}>
-                {articles.map((article) => (
+                {data.articles.map((article) => (
                     <Card.Root key={article.id} boxShadow="md" _hover={{ boxShadow: "xl" }}>
                         <Image
                             src={article.image}

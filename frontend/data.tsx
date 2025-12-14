@@ -1,3 +1,15 @@
+import {
+  LuLeaf,
+  LuUsers,
+  LuBook,
+  LuPhone,
+} from "react-icons/lu";
+import { GiWaterDrop } from "react-icons/gi";
+import { MdHistoryEdu } from "react-icons/md";
+import { FaHeart, FaUsers } from "react-icons/fa";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { RiBookLine } from "react-icons/ri";
+import { BiBookContent } from "react-icons/bi";
 const articles = [
   {
     id: 1,
@@ -19,4 +31,103 @@ const articles = [
   },
 ];
 
-export default articles;
+const faqItems = [
+  {
+    value: "a",
+    title: "How accurate is the AI disease detection?",
+    text: "Our AI model provides high-accuracy results with detailed information about plant diseases.",
+  },
+  {
+    value: "b",
+    title: "How do I post a plant in the marketplace?",
+    text: "Simply login, go to the marketplace section, click 'Add Plant', and fill in the details.",
+  },
+  {
+    value: "c",
+    title: "Can I contact the seller directly?",
+    text: "Yes, you can see the seller's contact information and reach them directly through the app.",
+  },
+];
+
+const features = [
+  {
+    id: 1,
+    title: "AI Disease Detection",
+    description: "Upload a plant image and get instant disease detection results.",
+    icon: LuLeaf,
+  },
+  {
+    id: 2,
+    title: "Marketplace",
+    description: "Buy and sell plants, contact sellers directly, and explore listings.",
+    icon: LuUsers,
+  },
+  {
+    id: 3,
+    title: "Articles",
+    description: "Read articles about plant care, disease prevention, and tips.",
+    icon: LuBook,
+  },
+  {
+    id: 4,
+    title: "Contact Us",
+    description: "Reach out to us through the contact form for support or inquiries.",
+    icon: LuPhone,
+  },
+  {
+    id: 5,
+    title: "Plant Care Tips",
+    description: "Get daily guidance on watering, sunlight, and soil requirements.",
+    icon: GiWaterDrop,
+  },
+  {
+    id: 6,
+    title: "Disease History",
+    description: "Track plant health over time and view past detections.",
+    icon: MdHistoryEdu,
+  },
+  {
+    id: 7,
+    title: "Marketplace Favorites",
+    description: "Save listings of plants you like for later.",
+    icon: FaHeart,
+  },
+  {
+    id: 8,
+    title: "Notifications",
+    description: "Receive alerts for messages, listings, and updates.",
+    icon: IoNotificationsOutline,
+  },
+  {
+    id: 9,
+    title: "AI Suggestions",
+    description: "Get plant recommendations based on climate and preferences.",
+    icon: LuLeaf,
+  },
+  {
+    id: 10,
+    title: "Community Forum",
+    description: "Discuss plant care and share experiences with others.",
+    icon: FaUsers,
+  },
+  {
+    id: 11,
+    title: "Plant Journal",
+    description: "Maintain logs for watering, growth, and treatments.",
+    icon: RiBookLine,
+  },
+  {
+    id: 12,
+    title: "Tutorials & Guides",
+    description: "Follow step-by-step planting and care guides.",
+    icon: BiBookContent,
+  },
+];
+
+const data = {
+  articles,
+  faqItems,
+  features
+};
+
+export default data;
