@@ -10,11 +10,27 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { LuMoon, LuSun, LuLogOut } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css"
+import { logoutUser } from "../../services/auth";
 
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      await logoutUser(token);
+      localStorage.removeItem("token");
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error("Logout failed", error);
+      localStorage.removeItem("token");
+      navigate("/", { replace: true });
+    }
+  };
+
+
   return (
     <Box bg="green.900" color="white" px={6} py={4} boxShadow="md">
       <Flex maxW="1200px" mx="auto" alignItems="center">
@@ -82,15 +98,13 @@ export default function Navbar() {
                   )}
                 </Menu.Item> */}
 
-                <Menu.Item value="logout" color="red.500">
+                <Menu.Item value="logout" color="red.500" onClick={handleLogout}>
                   <LuLogOut /> Logout
                 </Menu.Item>
               </Menu.Content>
             </Menu.Positioner>
           </Portal>
         </Menu.Root>
-
-
       </Flex>
     </Box>
   );

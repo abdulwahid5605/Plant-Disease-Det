@@ -8,7 +8,7 @@ export class AuthController {
   constructor(
     private authService: AuthService,
     private usersService: UsersService
-  ) {}
+  ) { }
 
   @Post('register')
   async register(@Body() body: any) {
@@ -23,6 +23,13 @@ export class AuthController {
     await this.authService.sendOtpEmail(user.email, otp);
     console.log("OTP for login:", otp);
     return { message: 'OTP sent to your email/phone.' };
+  }
+
+  @Post('logout')
+  async logout() {
+    return {
+      message: 'Logged out successfully',
+    };
   }
 
   @Post('verify-otp')

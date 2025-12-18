@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Box, Flex, Heading, Text, Image, Button, Card, CardBody } from "@chakra-ui/react";
-import articles from "../../data.tsx";
+import data from "../../data.tsx";
 
 export default function ArticleDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const article = articles.find((a) => a.id === Number(id));
+  const article = data.articles.find((a) => a.id === Number(id));
 
   if (!article) {
     return (

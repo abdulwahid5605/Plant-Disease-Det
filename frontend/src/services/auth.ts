@@ -25,3 +25,15 @@ export function verifyOtp(email: string, otp: string) {
     .post(`${API}/verify-otp`, { email, otp })
     .then((res) => res.data);
 }
+
+export function logoutUser(token: string | null) {
+  return axios.post(
+    `${API}/logout`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+}
