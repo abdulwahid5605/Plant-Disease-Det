@@ -124,10 +124,57 @@ const features = [
   },
 ];
 
+const marketplacePosts = [
+  {
+    id: "1",
+    title: "Snake Plant",
+    price: 1200,
+    image: "/market-plant-1.jpg",
+    description: "Low maintenance indoor plant",
+  },
+  {
+    id: "2",
+    title: "Money Plant",
+    price: 800,
+    image: "/market-plant-2.jpg",
+    description: "Brings positivity and fresh air",
+  },
+  {
+    id: "3",
+    title: "Aloe Vera",
+    price: 600,
+    image: "/market-plant-3.jpg",
+    description: "Medicinal and easy to grow",
+  },
+  {
+    id: "4",
+    title: "Snake Plant",
+    price: 1200,
+    image: "/market-plant-1.jpg",
+    description: "Low maintenance indoor plant",
+  },
+  {
+    id: "5",
+    title: "Money Plant",
+    price: 800,
+    image: "/market-plant-2.jpg",
+    description: "Brings positivity and fresh air",
+  },
+  {
+    id: "6",
+    title: "Aloe Vera",
+    price: 600,
+    image: "/market-plant-3.jpg",
+    description: "Medicinal and easy to grow",
+  },
+];
+
+
 const data = {
   articles,
   faqItems,
-  features
+  features,
+  marketplacePosts
 };
 
 export default data;

@@ -67,6 +67,12 @@ export default function Navbar() {
             >
               Articles
             </Link>
+             <Link
+              to="/market-place"
+              className="nav-link"
+            >
+              Market Place
+            </Link>
           </HStack>
         </Flex>
         <Menu.Root>

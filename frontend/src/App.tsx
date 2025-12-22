@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ui/ProtectedRoute";
 import ArticlesPage from "./pages/Articles";
 import ArticleDetail from "./pages/AcountDetail";
 import AboutUs from "./pages/AboutUs";
+import MarketPlace from "./pages/MarketPlace";
 
 export default function App() {
   return (
@@ -47,7 +48,11 @@ export default function App() {
             <ArticleDetail />
           </ProtectedRoute>
         } />
-
+        <Route path="/market-place" element={
+          <ProtectedRoute>
+            <MarketPlace />
+          </ProtectedRoute>
+        } />
       </Routes>
       <Footer />
     </BrowserRouter>
