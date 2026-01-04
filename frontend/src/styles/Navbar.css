@@ -3,8 +3,30 @@
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+  outline: none;
+  border: none;
 }
 
+/* Hover */
 .nav-link:hover {
-  color: #9AE6B4; 
+  color: #9AE6B4;
+}
+
+/* Click / Active */
+.nav-link:active {
+  color: #9AE6B4;
+  outline: none;
+  border: none;
+}
+
+/* Focus (mouse click) */
+.nav-link:focus {
+  outline: none;
+  border: none;
+}
+
+/* Focus-visible (keyboard navigation) */
+.nav-link:focus-visible {
+  outline: none;
+  border: none;
 }

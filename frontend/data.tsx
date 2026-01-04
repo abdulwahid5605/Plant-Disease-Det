@@ -27,8 +27,45 @@ const articles = [
     id: 3,
     title: "Why Soil Quality Matters for Healthy Plants",
     excerpt: "Understand how soil nutrients and structure impact plant immunity and disease resistance.",
-    image: "plant_disease_3.jpg",
+    image: "/plant_disease_3.jpg",
   },
+  {
+  id: 4,
+  title: "Common Fungal Diseases and How to Treat Them",
+  excerpt: "Discover the most widespread fungal infections in plants and the best methods to control them effectively.",
+  image: "/plant-article4.jpeg",
+},
+{
+  id: 5,
+  title: "The Role of Watering in Preventing Plant Diseases",
+  excerpt: "Learn how proper watering techniques can protect plants from root rot and other water-related diseases.",
+  image: "/plant-article5.jpeg",
+},
+{
+  id: 6,
+  title: "How Climate Conditions Affect Plant Disease Spread",
+  excerpt: "Explore how temperature, humidity, and weather patterns influence the development of plant diseases.",
+  image: "/plant-article6.jpeg",
+},
+{
+  id: 7,
+  title: "Best Organic Solutions for Plant Disease Control",
+  excerpt: "A guide to natural and eco-friendly treatments that help manage plant diseases without harmful chemicals.",
+  image: "/plant-article7.jpeg",
+},
+{
+  id: 8,
+  title: "Understanding Pest-Related Plant Diseases",
+  excerpt: "Identify how insects contribute to plant infections and learn ways to protect your crops from pest damage.",
+  image: "/plant-article8.jpeg",
+},
+{
+  id: 9,
+  title: "How AI Is Transforming Modern Plant Disease Detection",
+  excerpt: "See how artificial intelligence helps farmers detect diseases faster and make data-driven decisions.",
+  image: "/plant-article9.jpeg",
+}
+
 ];
 
 const faqItems = [
@@ -47,6 +84,16 @@ const faqItems = [
     title: "Can I contact the seller directly?",
     text: "Yes, you can see the seller's contact information and reach them directly through the app.",
   },
+  {
+  value: "d",
+  title: "Is the app free to use?",
+  text: "Yes, the app is free to use with optional premium features for advanced tools and insights.",
+},
+{
+  value: "e",
+  title: "What types of plants are supported for disease detection?",
+  text: "The AI supports a wide range of common crops, indoor plants, and garden plants, with more being added regularly.",
+},
 ];
 
 const features = [
