@@ -1,5 +1,3 @@
-"use client";
-
 import {
     Box,
     Button,
@@ -123,7 +121,6 @@ const MarketPlace = () => {
                 </Portal>
             </Dialog.Root>
 
-            {/* ---------------- ALL POSTS GRID ---------------- */}
             <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={6}>
                 {posts.map((post) => (
                     <Box
