@@ -1,5 +1,3 @@
-"use client";
-
 import {
     Box,
     Button,
@@ -174,23 +172,7 @@ const MarketPlace = () => {
                             <Button variant="outline">Cancel</Button>
                         </Dialog.ActionTrigger>
 
-                        <Dialog.ActionTrigger asChild>
-                            <Button colorScheme="green" onClick={handleAddPost}>
-                                Post
-                            </Button>
-                        </Dialog.ActionTrigger>
-                    </Dialog.Footer>
-
-                    <Dialog.CloseTrigger asChild>
-                        <CloseButton size="sm" />
-                    </Dialog.CloseTrigger>
-                </Dialog.Content>
-            </Dialog.Positioner>
-        </Portal>
-    </Dialog.Root>
-</Flex>
-            {/* ---------------- ALL POSTS GRID ---------------- */}
-            <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={6} mb={12}>
+            <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={6}>
                 {posts.map((post) => (
                     <Box
                         key={post.id}
