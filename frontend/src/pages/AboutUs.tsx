@@ -44,7 +44,7 @@ export default function AboutUs() {
 
                 <Flex direction="column" align="center" justify="center" textAlign="center" color="white" zIndex={1} px={4}>
                     <Heading size="3xl" mb={4}>
-                        Welcome to PlantApp
+                        Welcome to Plant Disease Detection System With AI
                     </Heading>
                     <Text fontSize="xl" mb={6}>
                         Detect plant diseases instantly and connect with the marketplace
@@ -97,21 +97,28 @@ export default function AboutUs() {
                             flex="1"
                             direction="column"
                             justify="center"
-                            p={{ base: 6, md: 12 }}
+                            p={{ base: 12, md: 24 }}
                         >
-                            <Heading mb={4}>
+                            <Heading mb={8}>
                                 Who We Are
                             </Heading>
-                            <Text fontSize="lg" color="gray.600" mb={4}>
-                                PlantApp is a smart agriculture platform designed to help plant owners,
-                                farmers, and gardeners detect plant diseases using AI-powered image
-                                analysis.
+                            <Text fontSize="lg" color="gray.600" mb={8}>
+                               PlantApp is a smart agriculture platform designed to support plant owners, farmers, and gardeners through AI-powered 
+                               disease detection and modern plant care solutions. Our goal is to simplify plant health management and promote 
+                               sustainable farming practices using accessible technology.
                             </Text>
-
-                            <Text fontSize="md" color="gray.600">
-                                Our platform not only provides instant disease detection results but
-                                also connects users with a trusted plant marketplace, educational
-                                articles, and a supportive community focused on sustainable plant care.
+                             <Text fontSize="lg" color="gray.600" mb={8}>
+                               With our AI-based image analysis, users can quickly identify potential plant diseases by uploading a photo and 
+                               receiving instant, reliable insights. This early detection helps prevent crop loss and ensures healthier plant growth.
+                            </Text>
+                             <Text fontSize="lg" color="gray.600" mb={8}>
+                              PlantApp goes beyond disease detection by offering a trusted plant marketplace where users can buy and sell plants and 
+                              farming resources with confidence. In addition, our educational articles and guides provide valuable knowledge on plant 
+                              health, soil care, pest control, and sustainable agriculture.
+                            </Text>
+                            <Text fontSize="lg" color="gray.600" mb={8}>
+                               By bringing together technology, education, and community, PlantApp creates a complete ecosystem focused on healthier 
+                               plants and a more sustainable future.
                             </Text>
                         </Flex>
                         <Box

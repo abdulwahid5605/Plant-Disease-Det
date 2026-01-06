@@ -2,19 +2,19 @@ import {
   Box,
   Flex,
   HStack,
+  Image,
   Text,
   Link as ChakraLink,
   Avatar,
   Menu,
   Portal,
   Button,
+  plainTextAdapter,
 } from "@chakra-ui/react";
 import { LuMoon, LuSun, LuLogOut } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css"
 import { logoutUser } from "../../services/auth";
-
-
 export default function Navbar() {
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -35,9 +35,17 @@ export default function Navbar() {
     <Box bg="green.900" color="white" px={6} py={4} boxShadow="md">
       <Flex maxW="1200px" mx="auto" alignItems="center">
         {/* Logo / Brand */}
-        <Text fontSize="xl" fontWeight="bold">
-          PlantApp
-        </Text>
+
+      <Link to="/">
+      <Image
+        src="./plant-logo.png"   // put your image in public/logo.png
+        alt="PlantApp Logo"
+        height="80px"
+        objectFit="contain"
+        cursor="pointer"
+      />
+    </Link>
+
 
         <Flex flex={1} justifyContent="center">
           <HStack gap={12}>
@@ -47,6 +55,7 @@ export default function Navbar() {
             >
               Home
             </Link>
+            
 
             <Link
               to="/about"
@@ -79,7 +88,7 @@ export default function Navbar() {
           <Menu.Trigger asChild>
             <Button variant="plain">
               <Avatar.Root cursor="pointer" size="sm">
-                <Avatar.Image src="https://bit.ly/sage-adebayo" />
+                {/* <Avatar.Image src="https://bit.ly/sage-adebayo" /> */}
                 <Avatar.Fallback name="User" />
               </Avatar.Root>
             </Button>
