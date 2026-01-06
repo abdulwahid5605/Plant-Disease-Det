@@ -23,6 +23,7 @@ export class PlantsController {
   @UseGuards(JwtAuthGuard)
   @Post('plant')
   createPlant(@Body() dto: CreatePlantDto, @Req() req: any) {
+    console.log('USER FROM JWT:', req.user);
     return this.plantsService.createPlant(dto, req.user.userId);
   }
 
