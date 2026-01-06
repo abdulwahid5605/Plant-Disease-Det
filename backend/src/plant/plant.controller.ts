@@ -5,6 +5,9 @@ import {
   Body,
   UseGuards,
   Req,
+  Patch,
+  Param,
+  Delete,
 } from '@nestjs/common';
 import { PlantsService } from './plants.service';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
@@ -18,12 +21,11 @@ export class CreatePlantDto {
 
 @Controller()
 export class PlantsController {
-  constructor(private plantsService: PlantsService) {}
+  constructor(private plantsService: PlantsService) { }
 
   @UseGuards(JwtAuthGuard)
   @Post('plant')
   createPlant(@Body() dto: CreatePlantDto, @Req() req: any) {
-    console.log('USER FROM JWT:', req.user);
     return this.plantsService.createPlant(dto, req.user.userId);
   }
 
@@ -36,5 +38,31 @@ export class PlantsController {
   @Get('plants/my')
   getMyPlants(@Req() req: any) {
     return this.plantsService.getMyPlants(req.user.userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('plant/:id')
+  updatePlant(
+    @Param('id') plantId: string,
+    @Body() dto: any,
+    @Req() req: any,
+  ) {
+    return this.plantsService.updatePlant(
+      plantId,
+      req.user.userId,
+      dto,
+    );
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('plant/:id')
+  deletePlant(
+    @Param('id') plantId: string,
+    @Req() req: any,
+  ) {
+    return this.plantsService.deletePlant(
+      plantId,
+      req.user.userId,
+    );
   }
 }
