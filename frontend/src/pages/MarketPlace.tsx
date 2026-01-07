@@ -18,8 +18,12 @@ import { useState } from "react";
 import data from "../../data";
 import { useEffect } from "react";
 import axios from "axios";
+import {  useNavigate } from "react-router-dom";
 
 const MarketPlace = () => {
+const navigate = useNavigate();
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
     const [posts, setPosts] = useState([])
     const [form, setForm] = useState({
         title: "",
@@ -28,13 +32,13 @@ const MarketPlace = () => {
         description: "",
     });
 
-    const token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
-    if (!token) {
-        alert("Please login first");
-        return;
-    }
+useEffect(() => {
+  if (!token) alert("Please login first");
+}, [token]);
 
+if (!token) return null;
 
 
     useEffect(() => {
@@ -49,39 +53,41 @@ const MarketPlace = () => {
         fetchPlants()
     }, []);
 
-    const handleAddPost = async () => {
-        if (!form.title || !form.price) return;
-
+        const handleAddPost = async () => {
         try {
             const token = localStorage.getItem("token");
-            await axios.post(
-                "http://localhost:3000/plant", 
-                {
-                    title: form.title,
-                    price: Number(form.price),
-                    image: form.image,
-                    description: form.description,
+
+            const res = await axios.post(
+            "http://localhost:3000/plant",
+            {
+                title: form.title,
+                price: Number(form.price),
+                image: form.image || "",
+                description: form.description || "",
+            },
+            {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
                 },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                }
+            }
             );
 
-
-
-
-            // refresh list
-            const res = await axios.get("http://localhost:3000/plants");
-            setPosts(res.data);
-
+            // ✅ SUCCESS
+            if (res.status === 200 || res.status === 201) {
+            setIsDialogOpen(false); // 🔥 CLOSE dialog
             setForm({ title: "", price: "", image: "", description: "" });
-        } catch (err) {
-            console.error(err);
+            }
+
+        } catch (err: any) {
+            console.error(
+            "POST ERROR:",
+            err.response?.data || err.message
+            );
+            // ❌ DO NOTHING → dialog stays open
         }
-    };
+        };
+
 
 
     return (
@@ -150,16 +156,19 @@ const MarketPlace = () => {
             <Flex
                 alignItems="center"
                 justify="space-between"
-                mb={10}
+                my={10}
+
                 mx={10}
 
             >
                 <Text>Total Posts: {posts.length}</Text>
 
                 <Heading >Market Place</Heading>
-                <Dialog.Root>
+                <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>    
                     <Dialog.Trigger asChild>
-                        <Button colorScheme="green">+ Add Post</Button>
+                    <Button colorScheme="green" onClick={() => setIsDialogOpen(true)}>
+                        + Add Post
+                    </Button>
                     </Dialog.Trigger>
 
                     <Portal>
@@ -205,9 +214,13 @@ const MarketPlace = () => {
                                 </Dialog.Body>
 
                                 <Dialog.Footer>
-                                    <Dialog.ActionTrigger asChild>
-                                        <Button variant="outline">Cancel</Button>
-                                    </Dialog.ActionTrigger>
+                                   <Button
+                                    variant="outline"
+                                    onClick={() => setIsDialogOpen(false)}
+                                    >
+                                    Cancel
+                                    </Button>
+
 
                                     <Button colorScheme="green" onClick={handleAddPost}>
                                         Add Post
@@ -241,9 +254,8 @@ const MarketPlace = () => {
                 </Flex>
             )}
 
-            {posts.lenght > 0 &&
+            {posts.length > 0 &&
                 (
-
                     <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={6}>
                         {posts.map((post) => (
                             <Box
@@ -256,12 +268,15 @@ const MarketPlace = () => {
                                 _hover={{ transform: "translateY(-4px)", transition: "0.3s" }}
                             >
                                 <Image
-                                    src={post.image}
+                                    src={post.image?.startsWith("http")
+                                        ? post.image
+                                        : "https://placehold.co/400x300"}
                                     alt={post.title}
                                     h="200px"
                                     w="100%"
                                     objectFit="cover"
-                                />
+                                    />
+
 
                                 <VStack align="start" p={4} gap={2}>
                                     <Text fontWeight="bold">{post.title}</Text>
