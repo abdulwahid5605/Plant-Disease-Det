@@ -31,11 +31,19 @@ export class PlantsService {
       .sort({ createdAt: -1 });
   }
 
-  async getMyPlants(userId: string) {
-    return this.plantModel
-      .find({ user: userId })
-      .sort({ createdAt: -1 });
-  }
+// async getMyPlants(userId: string) {
+//   return this.plantModel
+//     .find({ user: new Types.ObjectId(userId) }) // ✅ FIX
+//     .sort({ createdAt: -1 });
+// }
+async getMyPlants(userId: string) {
+  return this.plantModel
+    .find({ user: new Types.ObjectId(userId) })
+    .populate('user', 'email') // 🔥 THIS LINE
+    .sort({ createdAt: -1 });
+}
+
+
 
   async updatePlant(
     plantId: string,
