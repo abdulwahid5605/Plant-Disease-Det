@@ -1,14 +1,16 @@
 import {
     Box,
-    Flex,
     Heading,
     Text,
     SimpleGrid,
     Button,
-    Icon,
 } from "@chakra-ui/react";
-import { Accordion } from "@chakra-ui/react";
 import data from "../../data.tsx"
+import HeroSection from "../components/ui/HeroSection.tsx";
+import InfoSection from "../components/ui/InfoSection.tsx";
+import GetinTouch from "../components/ui/GetinTouch.tsx";
+import FeaturesSection from "../components/ui/FeatureSection.tsx";
+import FAQSection from "../components/ui/FAQSection.tsx";
 
 export default function AboutUs() {
     // Team members
@@ -20,148 +22,38 @@ export default function AboutUs() {
 
     return (
         <Box bg="gray.50" >
-            <Flex
-                direction="column"
-                align="center"
-                justify="center"
-                h="80vh"
-                w="100%"
-                bgImage="url('/plant_disease_2.jpeg')"
-                bgSize="cover"
-                bgRepeat="no-repeat"
-                css={{ clipPath: "polygon(0 0, 100% 0, 100% 56%, 0% 100%)" }}
-                // mb={20}
-            >
-                <Box
-                    position="absolute"
-                    top={0}
-                    left={0}
-                    w="100%"
-                    h="100%"
-                    bg="rgba(0, 0, 0, 0.5)"
-                    zIndex={0}
+            <HeroSection
+            title="Welcome to Plant Disease Detection System With AI"
+            subtitle="We use artificial intelligence to help farmers and plant lovers detect diseases early and grow healthier plants."
+            />
+                <Box mb={20} >
+                <InfoSection
+                        heading="Who we are ?"
+                        description="PlantApp is a smart agriculture platform designed to support plant owners, farmers, and gardeners through AI-powered
+                                    disease detection and modern plant care solutions. Our goal is to simplify plant health management and promote 
+                                    sustainable farming practices using accessible technology.
+                                    With our AI-based image analysis, users can quickly identify potential plant diseases by uploading a photo and 
+                                    receiving instant, reliable insights. This early detection helps prevent crop loss and ensures healthier plant growth.
+                                    PlantApp goes beyond disease detection by offering a trusted plant marketplace where users can buy and sell plants and 
+                                    farming resources with confidence. In addition, our educational articles and guides provide valuable knowledge on plant 
+                                    health, soil care, pest control, and sustainable agriculture.
+                                    By bringing together technology, education, and community, PlantApp creates a complete ecosystem focused on healthier 
+                                    plants and a more sustainable future. "
+                        image="/plant-home.jpg"
                 />
-
-                <Flex direction="column" align="center" justify="center" textAlign="center" color="white" zIndex={1} px={4}>
-                    <Heading size="3xl" mb={4}>
-                        Welcome to Plant Disease Detection System With AI
-                    </Heading>
-                    <Text fontSize="xl" mb={6}>
-                        Detect plant diseases instantly and connect with the marketplace
-                        community to buy and sell plants easily.
-                    </Text>
-                    <Button
-                        onClick={() =>
-                            window.scrollBy({ top: window.innerHeight, behavior: "smooth" })
-                        }
-                        colorScheme="green"
-                        size="lg"
-                        display="flex"
-                        alignItems="center"
-                        gap={3}
-                        _focus={{ boxShadow: "none" }}
-                    >
-                        <Text fontWeight="bold">Scroll Down</Text>
-                        <Box as="span" display="flex" alignItems="center" justifyContent="center">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="18"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <rect x="7" y="2" width="10" height="20" rx="5" ry="5" />
-                                <line x1="12" y1="6" x2="12" y2="10" />
-                            </svg>
-                        </Box>
-                    </Button>
-                </Flex>
-            </Flex>
-
-            <Box mb={20} >
-                <Box
-                    bg="green.100"
-                    borderRadius="none"
-                    shadow="xl"
-                    overflow="hidden"
-                >
-                    <Flex
-                        direction={{ base: "column", md: "row" }}
-                        align="stretch"
-                    >
-                        <Flex
-                            flex="1"
-                            direction="column"
-                            justify="center"
-                            p={{ base: 12, md: 24 }}
-                        >
-                            <Heading mb={8}>
-                                Who We Are
-                            </Heading>
-                            <Text fontSize="lg" color="gray.600" mb={8}>
-                               PlantApp is a smart agriculture platform designed to support plant owners, farmers, and gardeners through AI-powered 
-                               disease detection and modern plant care solutions. Our goal is to simplify plant health management and promote 
-                               sustainable farming practices using accessible technology.
-                            </Text>
-                             <Text fontSize="lg" color="gray.600" mb={8}>
-                               With our AI-based image analysis, users can quickly identify potential plant diseases by uploading a photo and 
-                               receiving instant, reliable insights. This early detection helps prevent crop loss and ensures healthier plant growth.
-                            </Text>
-                             <Text fontSize="lg" color="gray.600" mb={8}>
-                              PlantApp goes beyond disease detection by offering a trusted plant marketplace where users can buy and sell plants and 
-                              farming resources with confidence. In addition, our educational articles and guides provide valuable knowledge on plant 
-                              health, soil care, pest control, and sustainable agriculture.
-                            </Text>
-                            <Text fontSize="lg" color="gray.600" mb={8}>
-                               By bringing together technology, education, and community, PlantApp creates a complete ecosystem focused on healthier 
-                               plants and a more sustainable future.
-                            </Text>
-                        </Flex>
-                        <Box
-                            flex="1"
-                            minH={{ base: "300px", md: "70vh" }}
-                            bgImage="url('/vision.jpg')"
-                            bgSize="cover"
-                        />
-                    </Flex>
-                </Box>
+                
             </Box>
 
-            <Box mb={16} px={8}>
-                <Heading mb={6} textAlign="center">
-                    Our Features
-                </Heading>
-                <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap={8}>
-                    {data.features.map((feature) => (
-                        <Box
-                            key={feature.id}
-                            p={6}
-                            bg="white"
-                            borderRadius="md"
-                            shadow="md"
-                            textAlign="center"
-                        >
-                            <Icon
-                                as={feature.icon}
-                                w={10}
-                                h={10}
-                                color="green.500"
-                                mb={4}
-                            />
-                            <Heading size="md" mb={2}>
-                                {feature.title}
-                            </Heading>
-                            <Text>{feature.description}</Text>
-                        </Box>
-                    ))}
-                </SimpleGrid>
+           <FeaturesSection
+        features={data.features}
+        />
+
+            <Box>
+            <GetinTouch/>
+
             </Box>
 
-            <Box mb={16} px={8}>
+            <Box my={16} px={8}>
                 <Heading mb={6} textAlign="center">
                     Meet the Team
                 </Heading>
@@ -190,71 +82,11 @@ export default function AboutUs() {
                     ))}
                 </SimpleGrid>
             </Box>
-
-            <Box mb={16} px={8}>
-                <Heading mb={6} textAlign="center">
-                    Frequently Asked Questions
-                </Heading>
-
-                <Flex direction={{ base: "column", md: "row" }} gap={8} borderRadius="md" shadow="xl" p={8} bg="white">
-                    <Box flex={1}>
-                        <Accordion.Root collapsible defaultValue={["b"]} gap={4}>
-                            {data.faqItems.map((item, idx) => (
-                                <Accordion.Item key={idx} value={item.value}>
-                                    <Accordion.ItemTrigger>
-                                        <Accordion.ItemTrigger>
-                                            <Flex
-                                                p={4}
-                                                bg="green.50"
-                                                borderRadius="md"
-                                                shadow="sm"
-                                                cursor="pointer"
-                                                _hover={{ shadow: "md", bg: "green.100" }}
-                                                transition="all 0.2s"
-                                                minW="100%"
-                                                justify="space-between"
-                                            >
-                                                <Text fontWeight="semibold" color="green.900">
-                                                    {item.title}
-                                                </Text>
-                                                <Accordion.ItemIndicator />
-                                            </Flex>
-                                        </Accordion.ItemTrigger>
-
-                                    </Accordion.ItemTrigger>
-
-                                    <Accordion.ItemContent>
-                                        <Accordion.ItemBody>
-                                            <Box p={4} mt={2} bg="green.50" borderRadius="md" shadow="sm">
-                                                {item.text}
-                                            </Box>
-                                        </Accordion.ItemBody>
-                                    </Accordion.ItemContent>
-                                </Accordion.Item>
-                            ))}
-                        </Accordion.Root>
-                    </Box>
-
-                    <Box flex={1} display="flex" alignItems="center" justifyContent="center">
-                        <Box
-                            bg="green.100"
-                            borderRadius="xl"
-                            p={6}
-                            textAlign="center"
-                            shadow="lg"
-                            maxW="400px"
-                        >
-                            <Heading size="md" mb={4} color="green.900">
-                                Need More Help?
-                            </Heading>
-                            <Text mb={4}>
-                                Explore our tutorials, guides, and community forum to learn more about plant care and disease management.
-                            </Text>
-                            <Button colorScheme="green">Go to Resources</Button>
-                        </Box>
-                    </Box>
-                </Flex>
+            <Box>
+                <FAQSection/>
             </Box>
+
+           
 
             <Box textAlign="center" mb={16}>
                 <Heading mb={6} textAlign="center">

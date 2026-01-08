@@ -24,6 +24,8 @@ import { useMemo } from "react";
 import MessageModal from "../components/modals/MessageModal";
 import { useDisclosure } from "@chakra-ui/react";
 import PlantFormDialog from "../components/ui/PlantFormDialog";
+import HeroSection from "../components/ui/HeroSection";
+import InfoSection from "../components/ui/InfoSection";
 
 
 
@@ -269,67 +271,21 @@ const MarketPlace = () => {
     return (
         <>
             <Box>
-                <Flex
-                    direction="column"
-                    align="center"
-                    justify="center"
-                    h="80vh"
-                    w="100%"
-                    bgImage="url('/plant_disease_2.jpeg')"
-                    bgSize="cover"
-                    bgRepeat="no-repeat"
-                    css={{ clipPath: "polygon(0 0, 100% 0, 100% 56%, 0% 100%)" }}
-                // mb={20}
-                >
-                    <Box
-                        position="absolute"
-                        top={0}
-                        left={0}
-                        w="100%"
-                        h="100%"
-                        bg="rgba(0, 0, 0, 0.5)"
-                        zIndex={0}
-                    />
+                <HeroSection
+                title="Welcome to Plant Disease Detection System With AI"
+                subtitle="Buy and sell healthy plants with confidence in our trusted community marketplace."
+            />
+           <InfoSection
+            heading="Marketplace"
+            description="The PlantApp Marketplace is a trusted space where plant lovers, farmers, and sellers can buy and sell plants with confidence.
+            Users can explore detailed plant listings, compare prices, view essential information, and directly connect with sellers, 
+            making plant trading simple and transparent. Sellers can easily manage their posts, update plant details, and reach a growing community of
+            genuine buyers. By combining a secure marketplace with AI-powered plant insights, PlantApp promotes healthier plants, smarter decisions,
+            and sustainable plant care."
+            image="/plant-home.jpg"
+            />
 
-                    <Flex direction="column" align="center" justify="center" textAlign="center" color="white" zIndex={1} px={4}>
-                        <Heading size="3xl" mb={4}>
-                            Welcome to Plant Disease Detection System With AI
-                        </Heading>
-                        <Text fontSize="xl" mb={6}>
-                            Detect plant diseases instantly and connect with the marketplace
-                            community to buy and sell plants easily.
-                        </Text>
-                        <Button
-                            onClick={() =>
-                                window.scrollBy({ top: window.innerHeight, behavior: "smooth" })
-                            }
-                            colorScheme="green"
-                            size="lg"
-                            display="flex"
-                            alignItems="center"
-                            gap={3}
-                            _focus={{ boxShadow: "none" }}
-                        >
-                            <Text fontWeight="bold">Scroll Down</Text>
-                            <Box as="span" display="flex" alignItems="center" justifyContent="center">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="18"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <rect x="7" y="2" width="10" height="20" rx="5" ry="5" />
-                                    <line x1="12" y1="6" x2="12" y2="10" />
-                                </svg>
-                            </Box>
-                        </Button>
-                    </Flex>
-                </Flex>
+
                 <Flex
                     alignItems="center"
                     justify="space-between"
