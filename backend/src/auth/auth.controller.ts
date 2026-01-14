@@ -2,7 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
-
+import { BadRequestException } from '@nestjs/common';
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -16,14 +16,20 @@ export class AuthController {
     return this.usersService.createUser({ ...body, password: hashed });
   }
 
-  @Post('login')
-  async login(@Body() body: any) {
-    const user = await this.authService.validateUser(body.email, body.password);
-    const otp = await this.authService.generateOtpForUser(user._id);
-    await this.authService.sendOtpEmail(user.email, otp);
-    console.log("OTP for login:", otp);
-    return { message: 'OTP sent to your email/phone.' };
+@Post('login')
+async login(@Body() body: any) {
+  if (!body.email || !body.password) {
+    throw new BadRequestException('Email and password required');
   }
+
+  const user = await this.authService.validateUser(body.email, body.password);
+  const otp = await this.authService.generateOtpForUser(user._id);
+  console.log('LOGIN OTP:', otp);
+
+  await this.authService.sendOtpEmail(user.email, otp);
+
+  return { message: 'OTP sent to your email.' };
+}
 
   @Post('logout')
   async logout() {

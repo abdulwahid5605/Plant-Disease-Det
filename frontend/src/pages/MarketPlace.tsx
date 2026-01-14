@@ -113,40 +113,7 @@ const MarketPlace = () => {
     }, [view]);
 
 
-    const handleAddPost = async () => {
-        try {
-            const token = localStorage.getItem("token");
-
-            const res = await axios.post(
-                "http://localhost:3000/plant",
-                {
-                    title: form.title,
-                    price: Number(form.price),
-                    image: form.image || "",
-                    description: form.description || "",
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-
-            // ✅ SUCCESS
-            if (res.status === 200 || res.status === 201) {
-                setIsDialogOpen(false); // 🔥 CLOSE dialog
-                setForm({ title: "", price: "", image: "", description: "" });
-            }
-
-        } catch (err: any) {
-            console.error(
-                "POST ERROR:",
-                err.response?.data || err.message
-            );
-            // ❌ DO NOTHING → dialog stays open
-        }
-    };
+   
 
    const handleSubmitPlant = async (data) => {
   const token = localStorage.getItem("token");

@@ -41,16 +41,17 @@ const PlantCard = ({ post, isMyPost, onDelete, onEdit, onView }) => {
             >
                 {/* IMAGE */}
                 <Box position="relative">
-                    <Image
-                        src={
-                            post.image?.startsWith("http")
-                                ? post.image
-                                : "https://placehold.co/600x400"
-                        }
-                        h="320px"
-                        w="100%"
-                        objectFit="cover"
+                  <Image
+                    src={
+                        post.image
+                        ? `http://localhost:3000/uploads/${post.image}`
+                        : "https://placehold.co/600x400"
+                    }
+                    h="320px"
+                    w="100%"
+                    objectFit="cover"
                     />
+
 
                     {/* PRICE */}
                     <Box

@@ -63,23 +63,34 @@ const [form, setForm] = useState<Plant>({
 
 
     // 🔁 Pre-fill form for edit/view
-    useEffect(() => {
-        if (plant) {
-            setForm({
-                title: plant.title,
-                price: plant.price,
-                image: plant.image || "",
-                description: plant.description || "",
-            });
-        } else {
-            setForm({
-                title: "",
-                price: 0,
-                image: "",
-                description: "",
-            });
-        }
-    }, [plant, isOpen]);
+ useEffect(() => {
+  if (plant) {
+    setForm({
+      title: plant.title,
+      price: plant.price,
+      quantity: plant.quantity || 1,
+      description: plant.description || "",
+      number: plant.number || "",
+      email: plant.email || "",
+      address: plant.address || "",
+      plantAge: plant.plantAge || "",
+      image: null, // 🔥 file input reset
+    });
+  } else {
+    setForm({
+      title: "",
+      price: 0,
+      quantity: 1,
+      description: "",
+      number: "",
+      email: "",
+      address: "",
+      plantAge: "",
+      image: null,
+    });
+  }
+}, [plant, isOpen]);
+
 
     const handleSubmit = () => {
         if (!onSubmit) return;
@@ -233,12 +244,10 @@ const [form, setForm] = useState<Plant>({
   type="file"
   accept="image/*"
   disabled={isView}
-  onChange={(e) =>
-    setForm({
-      ...form,
-      image: e.target.files ? e.target.files[0] : null,
-    })
-  }
+ onChange={(e) =>
+  setForm({ ...form, image: e.target.files[0] }) // ✅ FILE
+}
+
 />
                                 </Box>
                             )}

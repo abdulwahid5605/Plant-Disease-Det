@@ -27,16 +27,22 @@ export class AuthService {
     });
   }
   
-  async validateUser(email: string, pass: string): Promise<any> {
-    console.log("------------",process.env.SENDER_EMAIL);
-    console.log("------------",process.env.SENDER_EMAIL_PASSWORD);
-    const user = await this.usersService.findByEmail(email);
-    if (user && (await bcrypt.compare(pass, user.password))) {
-      const { password, ...result } = user.toObject();
-      return result;
-    }
+async validateUser(email: string, pass: string) {
+  const user = await this.usersService.findByEmail(email);
+
+  if (!user) {
     throw new UnauthorizedException('Invalid credentials');
   }
+
+  const isMatch = await bcrypt.compare(pass, user.password);
+  if (!isMatch) {
+    throw new UnauthorizedException('Invalid credentials');
+  }
+
+  const obj = user.toObject();
+  delete obj.password;  
+  return obj;           
+}
 
   async generateOtpForUser(userId: string) {
     const otp = crypto.randomInt(100000, 999999).toString();
@@ -74,7 +80,7 @@ export class AuthService {
       otp: null,
       otpExpiresAt: null,
     });
-    const payload = { email: user.email, sub: user._id.toString() };
+    const payload = { name:user.name ,email: user.email, sub: user._id.toString() };
     return { access_token: this.jwtService.sign(payload) };
   }
 }

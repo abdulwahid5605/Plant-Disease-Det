@@ -1,20 +1,30 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { Plant } from './schemas/plant.schema';
+import { Plant ,PlantDocument } from './schemas/plant.schema';
 
 export class CreatePlantDto {
   title: string;
   price: number;
+  quantity: number;
+  description: string;
+  number: string;
+  email: string;
+  address: string;
+  plantAge: number;
   image?: string;
-  description?: string;
 }
 
 @Injectable()
 export class PlantsService {
   constructor(
-    @InjectModel(Plant.name) private plantModel: Model<Plant>,
-  ) { }
+    @InjectModel(Plant.name)
+  private plantModel: Model<PlantDocument>,
+  ) {}
 
   async createPlant(dto: CreatePlantDto, userId: string) {
     const plant = new this.plantModel({
@@ -31,19 +41,12 @@ export class PlantsService {
       .sort({ createdAt: -1 });
   }
 
-// async getMyPlants(userId: string) {
-//   return this.plantModel
-//     .find({ user: new Types.ObjectId(userId) }) // ✅ FIX
-//     .sort({ createdAt: -1 });
-// }
-async getMyPlants(userId: string) {
-  return this.plantModel
-    .find({ user: new Types.ObjectId(userId) })
-    .populate('user', 'email') // 🔥 THIS LINE
-    .sort({ createdAt: -1 });
-}
-
-
+  async getMyPlants(userId: string) {
+    return this.plantModel
+      .find({ user: new Types.ObjectId(userId) })
+      .populate('user', 'email')
+      .sort({ createdAt: -1 });
+  }
 
   async updatePlant(
     plantId: string,
@@ -57,8 +60,11 @@ async getMyPlants(userId: string) {
     }
 
     if (plant.user.toString() !== userId) {
-      throw new ForbiddenException('You are not allowed to update this plant');
+      throw new ForbiddenException(
+        'You are not allowed to update this plant',
+      );
     }
+
     Object.assign(plant, dto);
     return plant.save();
   }
@@ -71,7 +77,9 @@ async getMyPlants(userId: string) {
     }
 
     if (plant.user.toString() !== userId) {
-      throw new ForbiddenException('You are not allowed to delete this plant');
+      throw new ForbiddenException(
+        'You are not allowed to delete this plant',
+      );
     }
 
     await plant.deleteOne();

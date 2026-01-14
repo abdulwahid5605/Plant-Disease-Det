@@ -17,9 +17,31 @@ import { toaster } from "../ui/toaster";
 import { useState } from "react";
 export default function Navbar() {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
-
+const token = localStorage.getItem("token");
+console.log("TOKEN" , token)
   const navigate = useNavigate();
-  
+  const getUserInitial = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return "U";
+
+  try {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const payload = JSON.parse(atob(base64));
+
+    // payload me jo bhi tum name bhej rahe ho
+    // example: payload.name
+    if (payload.name) {
+      return payload.name.charAt(0).toUpperCase();
+    }
+
+    return "U";
+  } catch (err) {
+    console.error("TOKEN DECODE ERROR", err);
+    return "U";
+  }
+};
+
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -125,9 +147,8 @@ const confirmLogout = async () => {
         <Menu.Root>
           <Menu.Trigger asChild>
             <Button variant="plain">
-              <Avatar.Root cursor="pointer" size="sm">
-                {/* <Avatar.Image src="https://bit.ly/sage-adebayo" /> */}
-                <Avatar.Fallback name="User" />
+              <Avatar.Root cursor="pointer" size="md">
+                <Avatar.Fallback name={getUserInitial()} />
               </Avatar.Root>
             </Button>
 
