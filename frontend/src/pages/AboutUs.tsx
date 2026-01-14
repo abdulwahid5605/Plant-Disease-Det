@@ -39,7 +39,7 @@ export default function AboutUs() {
                                     health, soil care, pest control, and sustainable agriculture.
                                     By bringing together technology, education, and community, PlantApp creates a complete ecosystem focused on healthier 
                                     plants and a more sustainable future. "
-                        image="/plant-home.jpg"
+                        image="/plant-about.avif"
                 />
                 
             </Box>

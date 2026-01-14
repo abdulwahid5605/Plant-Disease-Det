@@ -27,7 +27,7 @@ export default function ContactForm() {
                 description="Have a question, suggestion, or need assistance? We’re here to help. Whether you want to learn more about PlantApp,
                  need support with plant disease detection, marketplace features, or have feedback to share, feel free to reach out to us. 
                  Our team is always happy to connect and support you on your journey toward smarter and healthier plant care. "
-                image="/plant-home.jpg"
+                image="/plant-contact.avif"
             />
             <ContactFormSection
                 title="Contact Us"

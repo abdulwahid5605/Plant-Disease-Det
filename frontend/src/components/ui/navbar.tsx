@@ -3,20 +3,23 @@ import {
   Flex,
   HStack,
   Image,
-  Text,
-  Link as ChakraLink,
   Avatar,
   Menu,
   Portal,
   Button,
-  plainTextAdapter,
 } from "@chakra-ui/react";
-import { LuMoon, LuSun, LuLogOut } from "react-icons/lu";
+import { LuLogOut } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css"
 import { logoutUser } from "../../services/auth";
+import ConfirmModal from "../modals/ConfirmModal";
+import { toaster } from "../ui/toaster";
+import { useState } from "react";
 export default function Navbar() {
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
+
   const navigate = useNavigate();
+  
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -29,6 +32,34 @@ export default function Navbar() {
       navigate("/", { replace: true });
     }
   };
+const confirmLogout = async () => {
+  setIsLogoutOpen(false); // 🔥 MODAL ALWAYS CLOSE FIRST
+
+  try {
+    const token = localStorage.getItem("token");
+    await logoutUser(token);
+
+    toaster.create({
+      title: "Logged out",
+      description: "You have been logged out successfully.",
+      type: "success",
+    });
+
+  } catch (error) {
+    console.error("Logout failed", error);
+
+    toaster.create({
+      title: "Logout failed",
+      description: "Something went wrong. You were logged out locally.",
+      type: "error",
+    });
+
+  } finally {
+    localStorage.removeItem("token");
+    navigate("/", { replace: true });
+  }
+};
+
 
 
   return (
@@ -62,6 +93,13 @@ export default function Navbar() {
               className="nav-link"
             >
               About Us
+            </Link>
+
+            <Link
+              to="/ai-disease"
+              className="nav-link"
+            >
+              AI Disease Tool
             </Link>
 
             <Link
@@ -113,14 +151,32 @@ export default function Navbar() {
                   )}
                 </Menu.Item> */}
 
-                <Menu.Item value="logout" color="red.500" onClick={handleLogout}>
-                  <LuLogOut /> Logout
-                </Menu.Item>
+               <Menu.Item
+  value="logout"
+  color="red.500"
+  onClick={() => setIsLogoutOpen(true)}
+>
+  <LuLogOut /> Logout
+</Menu.Item>
+
               </Menu.Content>
             </Menu.Positioner>
           </Portal>
         </Menu.Root>
       </Flex>
+      <ConfirmModal
+  isOpen={isLogoutOpen}
+  title="Confirm Logout"
+  message="Are you sure you want to log out of your account?"
+  confirmText="Yes, Logout"
+  cancelText="Cancel"
+  confirmColorScheme="blue"   // 🔥 IMPORTANT LINE
+  onClose={() => setIsLogoutOpen(false)}
+  onConfirm={confirmLogout}
+/>
+
+
+
     </Box>
   );
 }

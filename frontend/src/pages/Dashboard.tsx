@@ -126,7 +126,7 @@ const userId = useMemo(() => {
       _hover={{ bg: "green.600" }}
       onClick={() => navigate("/market-place")}
     >
-      View More Ads
+      View More Adds
     </Button>
   </Flex>
   <PlantFormDialog
@@ -137,7 +137,18 @@ const userId = useMemo(() => {
 />
 
       <GetinTouch/>
-        <ArticlesSection limit={3} />           
+        <ArticlesSection limit={3} />     
+        <Flex justify="center" mb={16}>
+    <Button
+      size="lg"
+      bg="green.500"
+      color="white"
+      _hover={{ bg: "green.600" }}
+      onClick={() => navigate("/articles")}
+    >
+      View More Articles
+    </Button>
+  </Flex>      
     <ContactFormSection/>
         <FAQSection/>
        <SocialConnect/>

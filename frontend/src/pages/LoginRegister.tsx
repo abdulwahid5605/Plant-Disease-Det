@@ -1,48 +1,78 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Button, Input, VStack, Heading, Text, Link, Tabs, Center } from "@chakra-ui/react";
+import { Box, Button, Input, VStack, Heading, Text, Link, Tabs, Center,  Select } from "@chakra-ui/react";
 import { registerUser, loginUser, verifyOtp } from "../services/auth";
 import { toaster } from "../components/ui/toaster";
+import ConfirmModal from "../components/modals/ConfirmModal";
 
 export default function AuthPage() {
+  const [registerName, setRegisterName] = useState("");
+  const [registerAddress, setRegisterAddress] = useState("");
+  const [registerNumber, setRegisterNumber] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
+
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [isOtpStep, setIsOtpStep] = useState(false);
+  const [tab , setTab] = useState("login")
+  const [isConfirmOpen , setIsConfirmOpen] = useState(false)
+const submitRegister = async () => {
+  // 🔥 modal ALWAYS close first
+  setIsConfirmOpen(false);
 
-  const handleRegister = async () => {
-    if (!registerEmail || !registerPassword) {
-      toaster.create({
-        title: "Missing Fields",
-        description: "Please enter both email and password.",
-        type: "warning",
-      });
-      return;
-    }
+  const toastId = toaster.create({
+    title: "Registering...",
+    type: "loading",
+  });
 
-    const toastId = toaster.create({
-      title: "Registering...",
-      type: "loading",
+  try {
+    await registerUser({
+      name: registerName,
+      number: registerNumber,
+      address: registerAddress,
+      email: registerEmail,
+      password: registerPassword,
     });
 
-    try {
-      await registerUser({ email: registerEmail, password: registerPassword });
-      toaster.update(toastId, {
-        title: "Registration Successful",
-        description: "Your account has been created. Please login.",
-        type: "success",
-      });
-    } catch (error: any) {
-      toaster.update(toastId, {
-        title: "Registration Failed",
-        description: error?.response?.data?.message || "Something went wrong.",
-        type: "error",
-      });
-    }
-  };
+    toaster.update(toastId, {
+      title: "Registration Successful",
+      description: "Your account has been created.",
+      type: "success",
+    });
+
+    setTab("login");
+  } catch (error: any) {
+    toaster.update(toastId, {
+      title: "Registration Failed",
+      description: error?.response?.data?.message || "Something went wrong.",
+      type: "error",
+    });
+  }
+};
+
+const handleRegister = () => {
+  if (
+    !registerName ||
+    !registerEmail ||
+    !registerPassword ||
+    !registerNumber ||
+    !registerAddress
+  ) {
+    toaster.create({
+      title: "Missing Fields",
+      description: "Please fill all fields before continuing.",
+      type: "warning",
+    });
+    return;
+  }
+
+  setIsConfirmOpen(true); // ✅ modal open
+};
+
+
 
   const handleLogin = async () => {
     if (!loginEmail || !loginPassword) {
@@ -110,11 +140,39 @@ export default function AuthPage() {
         boxShadow="lg"
         bg="white"
       >
-        <Tabs.Root defaultValue="login" colorScheme="teal">
+      <Tabs.Root
+        value={tab}
+        onValueChange={(val) => {
+          setTab(val);
+          setIsOtpStep(false);
+          setOtp("");
+        }}
+        colorScheme="teal"
+      >
           <Center>
             <Tabs.List mb={6} justifyContent="center">
-              <Tabs.Trigger value="login">Login</Tabs.Trigger>
-              <Tabs.Trigger value="register">Sign Up</Tabs.Trigger>
+              <Tabs.Trigger
+                value="login"
+                onClick={() => {
+                  setIsOtpStep(false);
+                  setOtp("");
+                  setTab("login");
+                }}
+                  >
+                    Login
+                  </Tabs.Trigger>
+
+                  <Tabs.Trigger
+                    value="register"
+                    onClick={() => {
+                      setIsOtpStep(false);
+                      setOtp("");
+                      setTab("register");
+                    }}
+                  >
+  Sign Up
+</Tabs.Trigger>
+
             </Tabs.List>
           </Center>
 
@@ -156,25 +214,35 @@ export default function AuthPage() {
                     />
                   </Box>
 
-                  <Link
+                  {/* <Link
                     color="teal.600"
                     fontSize="sm"
                     alignSelf="flex-end"
                     href="#"
                   >
                     Forgot Password?
-                  </Link>
+                  </Link> */}
 
                   <Button width="100%" colorScheme="teal" onClick={handleLogin}>
                     Login
                   </Button>
 
-                  <Text fontSize="sm" textAlign="center">
-                    Don't have an account?{" "}
-                    <Text as="span" color="teal.600">
-                      Sign Up
-                    </Text>
+                 <Text fontSize="sm" textAlign="center">
+                  Don't have an account?{" "}
+                  <Text
+                    as="span"
+                    color="teal.600"
+                    cursor="pointer"
+                    fontWeight="medium"
+                    onClick={() => {
+                      setIsOtpStep(false);
+                      setTab("register");
+                    }}
+                  >
+                    Sign Up
                   </Text>
+                </Text>
+
                 </VStack>
               </>
             ) : (
@@ -212,6 +280,17 @@ export default function AuthPage() {
             </Heading>
 
             <VStack gap={4}>
+               <Box width="100%">
+                <Text mb={1} fontSize="sm">
+                  Full Name
+                </Text>
+                <Input
+                  type="name"
+                  placeholder="Enter Your Full Name"
+                  value={registerName}
+                  onChange={(e) => setRegisterName(e.target.value)}
+                />
+              </Box>
               <Box width="100%">
                 <Text mb={1} fontSize="sm">
                   Email Address
@@ -221,6 +300,17 @@ export default function AuthPage() {
                   placeholder="yourname@example.com"
                   value={registerEmail}
                   onChange={(e) => setRegisterEmail(e.target.value)}
+                />
+              </Box>
+               <Box width="100%">
+                <Text mb={1} fontSize="sm">
+                  Phone Number
+                </Text>
+                <Input
+                  type="number"
+                  placeholder="Enter Your Phone Number"
+                  value={registerNumber}
+                  onChange={(e) => setRegisterNumber(e.target.value)}
                 />
               </Box>
 
@@ -235,21 +325,57 @@ export default function AuthPage() {
                   onChange={(e) => setRegisterPassword(e.target.value)}
                 />
               </Box>
+               <Box width="100%">
+                <Text mb={1} fontSize="sm">
+                  Address
+                </Text>
+                <Input
+                  type="address"
+                  placeholder="Enter Your Address"
+                  value={registerAddress}
+                  onChange={(e) => setRegisterAddress(e.target.value)}
+                />
+              </Box>
+              
 
-              <Button width="100%" colorScheme="teal" onClick={handleRegister}>
-                Register
-              </Button>
+
+
+             <Button width="100%" colorScheme="teal" onClick={handleRegister}>
+              Register
+            </Button>
+
 
               <Text fontSize="sm" textAlign="center">
                 Already have an account?{" "}
-                <Text as="span" color="teal.600">
+                <Text
+                  as="span"
+                  color="teal.600"
+                  cursor="pointer"
+                  fontWeight="medium"
+                  onClick={() => {
+                    setIsOtpStep(false);
+                    setTab("login");
+                  }}
+                >
                   Login
                 </Text>
               </Text>
+
             </VStack>
           </Tabs.Content>
         </Tabs.Root>
       </Box>
+     <ConfirmModal
+  isOpen={isConfirmOpen}
+  title="Confirm Registration"
+  message="Are you sure you want to create an account with these details?"
+  confirmText="Yes, Create Account"
+  cancelText="Cancel"
+  onClose={() => setIsConfirmOpen(false)}
+  onConfirm={submitRegister}
+/>
+
+
     </Center>
   );
 }

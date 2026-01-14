@@ -1,15 +1,18 @@
 "use client";
 
-import { Dialog, Button, Flex, Text } from "@chakra-ui/react";
+import { Dialog, Button, Flex, Text, Box } from "@chakra-ui/react";
 
 interface ConfirmModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   title?: string;
-  message: string;           // 🔥 REQUIRED (no hard-code)
+  message?: string;
   confirmText?: string;
   cancelText?: string;
+
+  /** optional: only use for destructive actions */
+  confirmColorScheme?: "red";
 }
 
 export default function ConfirmModal({
@@ -20,24 +23,32 @@ export default function ConfirmModal({
   message,
   confirmText = "Yes",
   cancelText = "Cancel",
+  confirmColorScheme,
 }: ConfirmModalProps) {
+  const displayMessage = message || title;
+
   return (
-    <Dialog.Root
-      open={isOpen}
-      onOpenChange={(e) => !e.open && onClose()}
-    >
+    <Dialog.Root open={isOpen} onOpenChange={(e) => !e.open && onClose()}>
       <Dialog.Backdrop bg="blackAlpha.600" />
 
       <Dialog.Positioner>
-        <Dialog.Content>
+        <Dialog.Content borderRadius="lg" px={6} py={4}>
           {/* HEADER */}
-          <Dialog.Header>
-            <Dialog.Title>{title}</Dialog.Title>
+          <Dialog.Header pb={2}>
+            <Dialog.Title>
+              <Text fontSize="lg" fontWeight="semibold" color="black">
+                {title}
+              </Text>
+            </Dialog.Title>
           </Dialog.Header>
 
           {/* BODY */}
           <Dialog.Body>
-            <Text>{message}</Text>
+            <Box py={2}>
+              <Text fontSize="md" color="black">
+                {displayMessage}
+              </Text>
+            </Box>
           </Dialog.Body>
 
           {/* FOOTER */}
@@ -47,7 +58,17 @@ export default function ConfirmModal({
                 {cancelText}
               </Button>
 
-              <Button colorScheme="red" onClick={onConfirm}>
+              <Button
+                bg={confirmColorScheme ? undefined : "black"}
+                color={confirmColorScheme ? undefined : "white"}
+                _hover={
+                  confirmColorScheme
+                    ? undefined
+                    : { bg: "gray.800" }
+                }
+                colorScheme={confirmColorScheme}
+                onClick={onConfirm}
+              >
                 {confirmText}
               </Button>
             </Flex>

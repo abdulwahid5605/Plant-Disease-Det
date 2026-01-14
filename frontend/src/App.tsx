@@ -11,6 +11,7 @@ import ArticlesPage from "./pages/Articles";
 import ArticleDetail from "./pages/AcountDetail";
 import AboutUs from "./pages/AboutUs";
 import MarketPlace from "./pages/MarketPlace";
+import AIDisease from "./pages/AiDisease";
 
 export default function App() {
   return (
@@ -31,6 +32,11 @@ export default function App() {
         <Route path="/about" element={
           <ProtectedRoute>
             <AboutUs />
+          </ProtectedRoute>
+        } />
+        <Route path="/ai-disease" element={
+          <ProtectedRoute>
+            <AIDisease />
           </ProtectedRoute>
         } />
         <Route path="/contact" element={

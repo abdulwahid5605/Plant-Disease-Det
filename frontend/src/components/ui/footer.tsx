@@ -6,6 +6,7 @@ import {
   Text,
   Link,
   Image,
+  Heading,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
@@ -16,6 +17,7 @@ export default function Footer() {
       {/* Main Footer */}
       <Flex
         maxW="1200px"
+        height="300px"
         mx="auto"
         px={6}
         py={10}
@@ -28,7 +30,7 @@ export default function Footer() {
           <Image
             src="/plant-logo.png"
             alt="PlantApp Logo"
-            height="80px"
+            height="60px"
           />
           <Text fontSize="sm" color="gray.300">
             Plant Disease Detection System with AI helps you grow smarter 🌱 <br></br>
@@ -45,7 +47,9 @@ export default function Footer() {
           </Text>
           <Link as={RouterLink} to="/" className="nav-link" color="white">Home</Link>
           <Link as={RouterLink} to="/articles" className="nav-link" color="white">Articles</Link>
-          <Link as={RouterLink} to="/market-place" className="nav-link" color="white">Marketplace</Link>
+          <Link as={RouterLink} to="/market-place" className="nav-link" color="white">Market place</Link>
+          <Link as={RouterLink} to="/ai-disease" className="nav-link" color="white">AI Disease Tool</Link>
+
         </VStack>
 
         {/* Support */}

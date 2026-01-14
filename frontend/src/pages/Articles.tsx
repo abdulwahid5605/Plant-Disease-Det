@@ -25,7 +25,7 @@ export default function ArticlesPage() {
                 sustainable farming practices, our content is curated to provide clear, reliable, and easy-to-understand knowledge. Whether you 
                 are a beginner or an experienced grower, these articles empower you with the insights needed to maintain healthier plants and achieve 
                 better growth outcomes."
-                image="/plant-home.jpg"
+                image="/plant-article.avif"
             />
            <ArticlesSection
             title="All Articles"

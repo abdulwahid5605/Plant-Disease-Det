@@ -26,6 +26,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import PlantFormDialog from "../components/ui/PlantFormDialog";
 import HeroSection from "../components/ui/HeroSection";
 import InfoSection from "../components/ui/InfoSection";
+import FAQSection from "../components/ui/FAQSection";
 
 
 
@@ -282,7 +283,7 @@ const MarketPlace = () => {
             making plant trading simple and transparent. Sellers can easily manage their posts, update plant details, and reach a growing community of
             genuine buyers. By combining a secure marketplace with AI-powered plant insights, PlantApp promotes healthier plants, smarter decisions,
             and sustainable plant care."
-            image="/plant-home.jpg"
+            image="/plant-marketplace.avif"
             />
 
 
@@ -382,68 +383,10 @@ const MarketPlace = () => {
 
 
                     )}
-                <Box mb={16} mt={12} px={8}>
-                    <Heading mb={6} textAlign="center">
-                        Frequently Asked Questions
-                    </Heading>
+                    <Box>
+                        <FAQSection/>
 
-                    <Flex direction={{ base: "column", md: "row" }} gap={8} borderRadius="md" shadow="xl" p={8} bg="white">
-                        <Box flex={1}>
-                            <Accordion.Root collapsible defaultValue={["b"]} gap={4}>
-                                {data.faqItems.map((item, idx) => (
-                                    <Accordion.Item key={idx} value={item.value}>
-                                        <Accordion.ItemTrigger>
-                                            <Flex
-                                                p={4}
-                                                bg="green.50"
-                                                borderRadius="md"
-                                                shadow="sm"
-                                                cursor="pointer"
-                                                _hover={{ shadow: "md", bg: "green.100" }}
-                                                transition="all 0.2s"
-                                                minW="100%"
-                                                justify="space-between"
-                                            >
-                                                <Text fontWeight="semibold" color="green.900">
-                                                    {item.title}
-                                                </Text>
-                                                <Accordion.ItemIndicator />
-                                            </Flex>
-                                        </Accordion.ItemTrigger>
-
-
-                                        <Accordion.ItemContent>
-                                            <Accordion.ItemBody>
-                                                <Box p={4} mt={2} bg="green.50" borderRadius="md" shadow="sm">
-                                                    {item.text}
-                                                </Box>
-                                            </Accordion.ItemBody>
-                                        </Accordion.ItemContent>
-                                    </Accordion.Item>
-                                ))}
-                            </Accordion.Root>
-                        </Box>
-
-                        <Box flex={1} display="flex" alignItems="center" justifyContent="center">
-                            <Box
-                                bg="green.100"
-                                borderRadius="xl"
-                                p={6}
-                                textAlign="center"
-                                shadow="lg"
-                                maxW="400px"
-                            >
-                                <Heading size="md" mb={4} color="green.900">
-                                    Need More Help?
-                                </Heading>
-                                <Text mb={4}>
-                                    Explore our tutorials, guides, and community forum to learn more about plant care and disease management.
-                                </Text>
-                                <Button colorScheme="green">Go to Resources</Button>
-                            </Box>
-                        </Box>
-                    </Flex>
-                </Box>
+                    </Box>
                 <Box textAlign="center" mb={16}>
                     <Heading mb={6} textAlign="center">
                         Ready to Start?

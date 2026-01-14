@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useDisclosure } from "@chakra-ui/react";
 import ConfirmModal from "../modals/ConfirmModal";
+import { Tooltip } from "../ui/tooltip"; //
 
 const formatPrice = (value: number | undefined) => {
     if (!value) return "";
@@ -109,17 +110,20 @@ const PlantCard = ({ post, isMyPost, onDelete, onEdit, onView }) => {
                         </Box>
                     </Text>
 
-
-
+                    <Tooltip
+                    content="Download the plant image from this post, then upload it on our AI Disease page to check for possible diseases."
+                    showArrow
+                    >
                     <Button
                         size="sm"
                         bg="gray.600"
                         color="white"
                         _hover={{ bg: "gray.800" }}
-                        onClick={() => navigate(`/ai-check/${post._id}`)}
+                        onClick={() => navigate(`/ai-disease`)}
                     >
                         🤖 AI Disease Check
                     </Button>
+                    </Tooltip>
 
 
                     <Flex gap={2}>
