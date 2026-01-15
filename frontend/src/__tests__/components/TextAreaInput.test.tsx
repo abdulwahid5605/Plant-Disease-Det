@@ -1,31 +1,31 @@
 import * as React from "react";
 import { screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { renderWithChakra } from "../../test-utils";
 import TextAreaInput from "../../components/ui/TextAreaInput";
+import { renderWithProviders } from "../../../test-utils";
 
 describe("TextAreaInput", () => {
   test("renders label and textarea", () => {
-    renderWithChakra(
+    renderWithProviders(
       <TextAreaInput
-        label="Description"
-        placeholder="Enter text"
+        label="Message"
+        placeholder="Write your message"
         value=""
         onChange={() => {}}
       />
     );
 
-    expect(screen.getByText("Description")).toBeInTheDocument();
+    expect(screen.getByText("Message")).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText("Enter text")
+      screen.getByPlaceholderText("Write your message")
     ).toBeInTheDocument();
   });
 
-  test("shows provided value", () => {
-    renderWithChakra(
+  test("renders provided value", () => {
+    renderWithProviders(
       <TextAreaInput
-        label="Message"
-        placeholder="Type here"
+        label="Description"
+        placeholder="Enter description"
         value="Hello world"
         onChange={() => {}}
       />
@@ -39,7 +39,7 @@ describe("TextAreaInput", () => {
   test("calls onChange when typing", () => {
     const handleChange = jest.fn();
 
-    renderWithChakra(
+    renderWithProviders(
       <TextAreaInput
         label="Comment"
         placeholder="Write comment"
@@ -53,6 +53,6 @@ describe("TextAreaInput", () => {
       { target: { value: "New text" } }
     );
 
-    expect(handleChange).toHaveBeenCalled();
+    expect(handleChange).toHaveBeenCalledTimes(1);
   });
 });

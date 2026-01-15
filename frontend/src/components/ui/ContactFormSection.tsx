@@ -123,7 +123,7 @@ export default function ContactFormSection({
               label="Phone Number"
               placeholder="Your Number"
               value={number}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setNumber(e.target.value)} // ✅ FIX
             />
 
             <TextInput

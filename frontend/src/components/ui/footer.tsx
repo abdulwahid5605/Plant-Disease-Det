@@ -26,66 +26,101 @@ export default function Footer() {
         gap={10}
       >
         {/* Brand */}
-        <VStack align="flex-start" spacing={3} maxW="380px">
+        <VStack align="flex-start" gap={3} maxW="380px">
           <Image
             src="/plant-logo.png"
             alt="PlantApp Logo"
             height="60px"
           />
           <Text fontSize="sm" color="gray.300">
-            Plant Disease Detection System with AI helps you grow smarter 🌱 <br></br>
+            Plant Disease Detection System with AI helps you grow smarter 🌱
+            <br />
             Discover plants, read articles, and explore the green marketplace.
- 
           </Text>
         </VStack>
 
-        {/* Links */}
-        
-        <VStack align="flex-start" spacing={2}>
+        {/* Explore Links */}
+        <VStack align="flex-start" gap={2}>
           <Text fontWeight="bold" color="white">
             Explore
           </Text>
-          <Link as={RouterLink} to="/" className="nav-link" color="white">Home</Link>
-          <Link as={RouterLink} to="/articles" className="nav-link" color="white">Articles</Link>
-          <Link as={RouterLink} to="/market-place" className="nav-link" color="white">Market place</Link>
-          <Link as={RouterLink} to="/ai-disease" className="nav-link" color="white">AI Disease Tool</Link>
 
+          <Link asChild className="nav-link" color="white">
+            <RouterLink to="/">Home</RouterLink>
+          </Link>
+
+          <Link asChild  className="nav-link" color="white">
+            <RouterLink to="/articles">Articles</RouterLink>
+          </Link>
+
+          <Link asChild className="nav-link" color="white">
+            <RouterLink to="/market-place">Market place</RouterLink>
+          </Link>
+
+          <Link asChild className="nav-link" color="white">
+            <RouterLink to="/ai-disease">AI Disease Tool</RouterLink>
+          </Link>
         </VStack>
 
         {/* Support */}
-        <VStack align="flex-start" spacing={2}>
+        <VStack align="flex-start" gap={2}>
           <Text fontWeight="bold" color="white">
             Support
           </Text>
-          <Link as={RouterLink} to="/about" className="nav-link" color="white">About Us</Link>
-          <Link as={RouterLink} to="/contact" className="nav-link" color="white">Contact</Link>
-          {/* <Link color="white">Privacy Policy</Link>
-          <Link color="white">Terms & Conditions</Link> */}
+
+          <Link asChild className="nav-link" color="white">
+            <RouterLink to="/about">About Us</RouterLink>
+          </Link>
+
+          <Link asChild className="nav-link" color="white">
+            <RouterLink to="/contact">Contact</RouterLink>
+          </Link>
         </VStack>
 
         {/* Social */}
-        <VStack align="flex-start" spacing={6}>
+        <VStack align="flex-start" gap={6}>
           <Text fontWeight="bold" color="white">
             Follow Us
           </Text>
-          <HStack spacing={4}>
-            <Link href="#" className="nav-link" isExternal aria-label="Facebook">
+
+          <HStack gap={4}>
+            <Link
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="nav-link"
+            >
               <FaFacebookF />
             </Link>
-            <Link href="#" className="nav-link" isExternal aria-label="Instagram">
+
+            <Link
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="nav-link"
+            >
               <FaInstagram />
             </Link>
-            <Link href="#" className="nav-link" isExternal aria-label="Twitter">
+
+            <Link
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+              className="nav-link"
+            >
               <FaTwitter />
             </Link>
           </HStack>
         </VStack>
       </Flex>
 
-
       {/* Bottom Bar */}
       <Box textAlign="center" py={4} fontSize="sm" color="gray.300">
-        © {new Date().getFullYear()} Plant Disease Detection System with AI. All rights reserved.
+        © {new Date().getFullYear()} Plant Disease Detection System with AI. All
+        rights reserved.
       </Box>
     </Box>
   );

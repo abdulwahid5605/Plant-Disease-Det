@@ -4,14 +4,13 @@ import {
   Flex,
   Text,
   Button,
-  Accordion
+  Accordion,
 } from "@chakra-ui/react";
 import data from "../../../data";
 
 const FAQSection = () => {
   return (
     <Box my={16} px={8}>
-      {/* Heading */}
       <Heading mb={6} textAlign="center">
         Frequently Asked Questions
       </Heading>
@@ -24,22 +23,22 @@ const FAQSection = () => {
         p={8}
         bg="white"
       >
-        {/* FAQ Accordion */}
+        {/* FAQ */}
         <Box flex={1}>
-          <Accordion.Root collapsible defaultValue={["b"]} gap={4}>
+          <Accordion.Root collapsible defaultValue={["b"]}>
             {data.faqItems.map((item, idx) => (
               <Accordion.Item key={idx} value={item.value}>
                 <Accordion.ItemTrigger>
                   <Flex
+                    w="100%"
                     p={4}
                     bg="green.50"
                     borderRadius="md"
-                    shadow="sm"
-                    cursor="pointer"
-                    _hover={{ shadow: "md", bg: "green.100" }}
-                    transition="all 0.2s"
-                    minW="100%"
                     justify="space-between"
+                    align="center"
+                    cursor="pointer"
+                    _hover={{ bg: "green.100" }}
+                    transition="all 0.2s"
                   >
                     <Text fontWeight="semibold" color="green.900">
                       {item.title}
@@ -49,24 +48,22 @@ const FAQSection = () => {
                 </Accordion.ItemTrigger>
 
                 <Accordion.ItemContent>
-                  <Accordion.ItemBody>
-                    <Box
-                      p={4}
-                      mt={2}
-                      bg="green.50"
-                      borderRadius="md"
-                      shadow="sm"
-                    >
-                      {item.text}
-                    </Box>
-                  </Accordion.ItemBody>
+                  <Box
+                    p={4}
+                    mt={2}
+                    bg="green.50"
+                    borderRadius="md"
+                    shadow="sm"
+                  >
+                    {item.text}
+                  </Box>
                 </Accordion.ItemContent>
               </Accordion.Item>
             ))}
           </Accordion.Root>
         </Box>
 
-        {/* Side Help Box */}
+        {/* Side Help */}
         <Box
           flex={1}
           display="flex"
@@ -85,8 +82,7 @@ const FAQSection = () => {
               Need More Help?
             </Heading>
             <Text mb={4}>
-              Explore our tutorials, guides, and community forum to learn more
-              about plant care and disease management.
+              Explore our tutorials, guides, and community forum.
             </Text>
             <Button colorScheme="green">
               Go to Resources

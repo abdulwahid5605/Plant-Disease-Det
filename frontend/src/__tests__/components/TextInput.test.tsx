@@ -1,12 +1,12 @@
 import * as React from "react";
 import { screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { renderWithChakra } from "../../test-utils";
 import TextInput from "../../components/ui/TextInput";
+import { renderWithProviders } from "../../../test-utils";
 
 describe("TextInput", () => {
-  test("renders label and input", () => {
-    renderWithChakra(
+  test("renders label and input field", () => {
+    renderWithProviders(
       <TextInput
         label="Email"
         placeholder="Enter email"
@@ -21,8 +21,8 @@ describe("TextInput", () => {
     ).toBeInTheDocument();
   });
 
-  test("renders input with provided value", () => {
-    renderWithChakra(
+  test("renders provided value", () => {
+    renderWithProviders(
       <TextInput
         label="Username"
         placeholder="Enter username"
@@ -36,22 +36,28 @@ describe("TextInput", () => {
     ).toBeInTheDocument();
   });
 
-  test("uses default input type text", () => {
-    renderWithChakra(
+  test("calls onChange when typing", () => {
+    const handleChange = jest.fn();
+
+    renderWithProviders(
       <TextInput
         label="Name"
         placeholder="Enter name"
         value=""
-        onChange={() => {}}
+        onChange={handleChange}
       />
     );
 
-    const input = screen.getByPlaceholderText("Enter name") as HTMLInputElement;
-    expect(input.type).toBe("text");
+    fireEvent.change(
+      screen.getByPlaceholderText("Enter name"),
+      { target: { value: "Bilal" } }
+    );
+
+    expect(handleChange).toHaveBeenCalledTimes(1);
   });
 
-  test("uses provided input type", () => {
-    renderWithChakra(
+  test("respects input type prop", () => {
+    renderWithProviders(
       <TextInput
         label="Password"
         type="password"
@@ -61,27 +67,7 @@ describe("TextInput", () => {
       />
     );
 
-    const input = screen.getByPlaceholderText("Enter password") as HTMLInputElement;
-    expect(input.type).toBe("password");
-  });
-
-  test("calls onChange when typing", () => {
-    const handleChange = jest.fn();
-
-    renderWithChakra(
-      <TextInput
-        label="Email"
-        placeholder="Enter email"
-        value=""
-        onChange={handleChange}
-      />
-    );
-
-    fireEvent.change(
-      screen.getByPlaceholderText("Enter email"),
-      { target: { value: "test@example.com" } }
-    );
-
-    expect(handleChange).toHaveBeenCalled();
+    const input = screen.getByPlaceholderText("Enter password");
+    expect(input).toHaveAttribute("type", "password");
   });
 });

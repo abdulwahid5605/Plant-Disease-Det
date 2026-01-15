@@ -2,12 +2,15 @@ import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
+
 import GuestRoute from "../../components/ui/GuestRoute";
 
 describe("GuestRoute", () => {
-  afterEach(() => localStorage.clear());
+  afterEach(() => {
+    localStorage.clear();
+  });
 
-  test("renders children when token is not present", () => {
+  test("renders children when user is NOT logged in", () => {
     render(
       <MemoryRouter initialEntries={["/login"]}>
         <Routes>
@@ -23,16 +26,17 @@ describe("GuestRoute", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText("Guest Content")).toBeInTheDocument();
+    expect(
+      screen.getByText("Guest Content")
+    ).toBeInTheDocument();
   });
 
   test("redirects to dashboard when token exists", () => {
-    localStorage.setItem("token", "token");
+    localStorage.setItem("token", "fake-token");
 
     render(
       <MemoryRouter initialEntries={["/login"]}>
         <Routes>
-          <Route path="/dashboard" element={<div>Dashboard Page</div>} />
           <Route
             path="/login"
             element={
@@ -41,10 +45,20 @@ describe("GuestRoute", () => {
               </GuestRoute>
             }
           />
+          <Route
+            path="/dashboard"
+            element={<div>Dashboard Page</div>}
+          />
         </Routes>
       </MemoryRouter>
     );
 
-    expect(screen.getByText("Dashboard Page")).toBeInTheDocument();
+    expect(
+      screen.getByText("Dashboard Page")
+    ).toBeInTheDocument();
+
+    expect(
+      screen.queryByText("Guest Content")
+    ).not.toBeInTheDocument();
   });
 });
