@@ -24,9 +24,9 @@ const GetinTouch = () => {
   ];
 
   return (
-    <Box py={4} px={8} bg="green.100">
+    <Box py={8} px={8} bg="green.100">
       {/* Heading */}
-      <Heading textAlign="center" mb={10}>
+      <Heading textAlign="center" fontSize="2xl" m={4}>
         Get in Touch
       </Heading>
 
@@ -56,7 +56,7 @@ const GetinTouch = () => {
 
       {/* Help Section */}
       <Box px={8} py={16}>
-        <Heading textAlign="center" mb={10}>
+        <Heading textAlign="center" fontSize="2xl" m={4}>
           How Can We Help You?
         </Heading>
 

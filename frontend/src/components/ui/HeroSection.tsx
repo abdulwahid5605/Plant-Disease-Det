@@ -49,7 +49,7 @@ const HeroSection = ({
         zIndex={1}
         px={4}
       >
-        <Heading size="3xl" mb={4}>
+        <Heading size="4xl" mb={4}>
           {title}
         </Heading>
 
@@ -68,7 +68,7 @@ const HeroSection = ({
               })
             }
             colorScheme="green"
-            size="lg"
+            size="xl"
             display="flex"
             alignItems="center"
             gap={3}

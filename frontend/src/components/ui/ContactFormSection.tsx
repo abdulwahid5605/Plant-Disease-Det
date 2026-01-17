@@ -107,7 +107,7 @@ export default function ContactFormSection({
         bg="white"
       >
         <Box w="100%" maxW="500px">
-          <Heading mb={6} textAlign="center" fontSize="xl">
+          <Heading mb={6} textAlign="center" fontSize="2xl">
             {title}
           </Heading>
 

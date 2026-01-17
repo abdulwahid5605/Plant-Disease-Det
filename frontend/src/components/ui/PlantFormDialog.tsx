@@ -99,7 +99,7 @@ const [form, setForm] = useState<Plant>({
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={(e) => !e.open && onClose()}>
-            <Dialog.Backdrop bg="blackAlpha.600" />
+            <Dialog.Backdrop  bg="blackAlpha.600" />
 
             <Dialog.Positioner>
                 <Dialog.Content>
@@ -114,7 +114,7 @@ const [form, setForm] = useState<Plant>({
 
                     {/* BODY */}
                     <Dialog.Body>
-                        <VStack gap={4} align="stretch">
+                        <VStack gap={1} align="stretch">
                             {/* Plant Name */}
                             <Box>
                                 <Text fontSize="sm" mb={1}>Plant Name</Text>

@@ -268,7 +268,7 @@ const MarketPlace = () => {
                     </Text>
 
                     {/* CENTER */}
-                    <Heading>
+                    <Heading fontSize="30px">
                         {view === "my" ? "Market Place / My Posts" : "Market Place / All Post"}
                     </Heading>
 
@@ -309,7 +309,7 @@ const MarketPlace = () => {
                         borderRadius="lg"
                         bg="green.50"
                     >
-                        <Heading size="md" color="green.700" mb={2}>
+                        <Heading size="xl" color="green.700" mb={2}>
                             No Plants Available 🌱
                         </Heading>
                         <Text color="gray.600" textAlign="center" maxW="400px">

@@ -11,7 +11,7 @@ import data from "../../../data";
 const FAQSection = () => {
   return (
     <Box my={16} px={8}>
-      <Heading mb={6} textAlign="center">
+      <Heading mb={10} mt={6} fontSize={"28px"} textAlign="center">
         Frequently Asked Questions
       </Heading>
 

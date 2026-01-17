@@ -54,10 +54,10 @@ export default function AboutUs() {
             </Box>
 
             <Box my={16} px={8}>
-                <Heading mb={6} textAlign="center">
+                <Heading py={6}  textAlign="center" fontSize="30px">
                     Meet the Team
                 </Heading>
-                <SimpleGrid columns={{ base: 1, md: 3 }} gap={8} textAlign="center">
+                <SimpleGrid py={6} px={12} columns={{ base: 1, md: 3 }} gap={8} textAlign="center">
                     {team.map((member, idx) => (
                         <Box key={idx} bg="white" borderRadius="md" shadow="md" overflow="hidden">
                             {/* Full Image */}

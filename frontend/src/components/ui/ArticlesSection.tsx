@@ -28,12 +28,12 @@ const truncateText = (text: string, length = 100) => {
 };
 
   return (
-    <Box mb={16} px={8}>
-      <Heading my={12} textAlign="center">
+    <Box  py={8} px={10}>
+      <Heading mb={14} mt={10} fontSize={"30px"} textAlign="center">
         {title}
       </Heading>
 
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={8}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={12}>
         {articlesToShow.map((article) => (
           <Card.Root
             key={article.id}

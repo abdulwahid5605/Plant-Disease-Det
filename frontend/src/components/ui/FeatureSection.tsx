@@ -17,8 +17,8 @@ const FeaturesSection = ({
   features,
 }: FeaturesSectionProps) => {
   return (
-    <Box mb={16} px={8}>
-      <Heading mb={6} textAlign="center">
+    <Box  mb={10} px={6} py={8}>
+      <Heading mb={12} textAlign="center" fontSize="3xl">
         {heading}
       </Heading>
 

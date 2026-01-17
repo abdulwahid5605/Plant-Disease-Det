@@ -99,7 +99,7 @@ const userId = useMemo(() => {
 
 
 
-      <Heading textAlign="center" mb={6}>
+      <Heading textAlign="center"  py={12} fontSize="30px">
         Marketplace
       </Heading>
 
@@ -138,7 +138,7 @@ const userId = useMemo(() => {
 
       <GetinTouch/>
         <ArticlesSection limit={3} />     
-        <Flex justify="center" mb={16}>
+        <Flex justify="center" >
     <Button
       size="lg"
       bg="green.500"

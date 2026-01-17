@@ -12,8 +12,8 @@ const SocialConnect = ({
   platforms = ["Facebook", "Instagram", "LinkedIn"],
 }: SocialConnectProps) => {
   return (
-    <Box mb={16} textAlign="center">
-      <Heading mb={4}>{heading}</Heading>
+    <Box py={12} textAlign="center">
+      <Heading mb={6} fontSize={"26px"}>{heading} </Heading>
 
       <Text color="gray.600" mb={6}>
         {subtitle}
