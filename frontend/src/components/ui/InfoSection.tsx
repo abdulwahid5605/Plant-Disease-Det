@@ -7,7 +7,7 @@ const InfoSection = ({
   bgColor = "green.100",
 }) => {
   return (
-    <Box mb={20}>
+    <Box mb={40}>
       <Box
         bg={bgColor}
         borderRadius="none"
@@ -22,8 +22,8 @@ const InfoSection = ({
             justify="center"
             p={{ base: 12, md: 24 }}
           >
-            <Heading mb={8}>{heading}</Heading>
-            <Text fontSize="lg" color="gray.600" mb={8}>
+            <Heading m={10} fontSize="32px" > {heading}</Heading>
+            <Text fontSize="xl" color="gray.600" m={10}>
               {description}
             </Text>
           </Flex>

@@ -1,10 +1,9 @@
 import * as React from "react";
-import { screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { renderWithChakra } from "../../test-utils";
 import { Provider } from "../../components/ui/provider";
 
-// mock next-themes used inside ColorModeProvider
+// 🔥 mock next-themes (ColorModeProvider ke liye)
 jest.mock("next-themes", () => ({
   ThemeProvider: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
@@ -13,7 +12,7 @@ jest.mock("next-themes", () => ({
 
 describe("Provider", () => {
   test("renders children correctly", () => {
-    renderWithChakra(
+    render(
       <Provider>
         <div>App Content</div>
       </Provider>
@@ -22,8 +21,8 @@ describe("Provider", () => {
     expect(screen.getByText("App Content")).toBeInTheDocument();
   });
 
-  test("wraps content with Chakra and ColorMode providers", () => {
-    renderWithChakra(
+  test("wraps content successfully without crashing", () => {
+    render(
       <Provider>
         <span>Wrapped</span>
       </Provider>

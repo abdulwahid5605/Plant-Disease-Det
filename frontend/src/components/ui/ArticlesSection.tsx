@@ -21,6 +21,11 @@ export default function ArticlesSection({
   limit = 3,
 }: ArticlesSectionProps) {
   const articlesToShow = data.articles.slice(0, limit);
+const truncateText = (text: string, length = 100) => {
+  return text.length > length
+    ? text.substring(0, length) + "..."
+    : text;
+};
 
   return (
     <Box mb={16} px={8}>
@@ -38,16 +43,16 @@ export default function ArticlesSection({
             <Image
               src={article.image}
               alt={article.title}
-              height="180px"
+              height="350px"
               w="100%"
               objectFit="cover"
             />
 
             <Card.Body gap={3}>
               <Card.Title>{article.title}</Card.Title>
-              <Card.Description>
-                {article.excerpt}
-              </Card.Description>
+            <Card.Description>
+  {truncateText(article.excerpt, 100)}
+</Card.Description>
 
               <Link to={`/articles/${article.id}`}>
                 <Button

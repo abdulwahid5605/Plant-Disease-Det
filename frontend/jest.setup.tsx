@@ -10,10 +10,22 @@ Object.defineProperty(window, "matchMedia", {
     matches: false,
     media: "",
     onchange: null,
-    addListener: () => {}, 
-    removeListener: () => {}, 
+    addListener: () => {},
+    removeListener: () => {},
     addEventListener: () => {},
     removeEventListener: () => {},
     dispatchEvent: () => false,
   }),
 });
+
+// ✅ SAFE structuredClone polyfill
+if (typeof global.structuredClone === "undefined") {
+  global.structuredClone = (value: any) => {
+    if (value === undefined) return value;
+    try {
+      return JSON.parse(JSON.stringify(value));
+    } catch {
+      return value;
+    }
+  };
+}

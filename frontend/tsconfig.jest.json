@@ -15,6 +15,7 @@
 
     "strict": true,
     "skipLibCheck": true,
+    "isolatedModules": true,
     "noEmit": true
   },
   "include": ["src", "src/__tests__"]

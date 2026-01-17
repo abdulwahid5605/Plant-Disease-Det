@@ -30,7 +30,7 @@ export default function ContactForm() {
                 image="/plant-contact.avif"
             />
             <ContactFormSection
-                title="Contact Us"
+                title="Contact With The Team"
                 image="/plant-disease-contactus.jpeg"
                 />
             <GetinTouch/>

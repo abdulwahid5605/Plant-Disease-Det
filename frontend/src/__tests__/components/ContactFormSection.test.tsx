@@ -1,6 +1,11 @@
 import * as React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import {
+  screen,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { renderWithProviders } from "../../../test-utils";
 
 import ContactFormSection from "../../components/ui/ContactFormSection";
 
@@ -18,7 +23,7 @@ jest.mock("../../components/ui/toaster", () => ({
 }));
 
 /* ------------------------------------------------------------------ */
-/* 🔥 MOCK custom inputs (ALREADY TESTED SEPARATELY) */
+/* 🔥 MOCK custom inputs */
 /* ------------------------------------------------------------------ */
 jest.mock("../../components/ui/TextInput", () => (props: any) => (
   <input
@@ -42,9 +47,7 @@ jest.mock("../../components/ui/TextAreaInput", () => (props: any) => (
 /* 🔥 MOCK fetch */
 /* ------------------------------------------------------------------ */
 global.fetch = jest.fn(() =>
-  Promise.resolve({
-    ok: true,
-  })
+  Promise.resolve({ ok: true })
 ) as jest.Mock;
 
 /* ------------------------------------------------------------------ */
@@ -56,7 +59,7 @@ describe("ContactFormSection", () => {
   });
 
   test("renders default title", () => {
-    render(<ContactFormSection />);
+    renderWithProviders(<ContactFormSection />);
 
     expect(
       screen.getByRole("heading", { name: /contact us/i })
@@ -64,7 +67,9 @@ describe("ContactFormSection", () => {
   });
 
   test("renders custom title", () => {
-    render(<ContactFormSection title="Get In Touch" />);
+    renderWithProviders(
+      <ContactFormSection title="Get In Touch" />
+    );
 
     expect(
       screen.getByRole("heading", { name: /get in touch/i })
@@ -72,7 +77,7 @@ describe("ContactFormSection", () => {
   });
 
   test("shows warning toast if required fields are missing", () => {
-    render(<ContactFormSection />);
+    renderWithProviders(<ContactFormSection />);
 
     fireEvent.click(
       screen.getByRole("button", { name: /send message/i })
@@ -89,7 +94,7 @@ describe("ContactFormSection", () => {
   test("submits form successfully and shows success toast", async () => {
     createMock.mockReturnValueOnce("toast-id");
 
-    render(<ContactFormSection />);
+    renderWithProviders(<ContactFormSection />);
 
     fireEvent.change(screen.getByLabelText("Full Name"), {
       target: { value: "Bilal" },
@@ -125,10 +130,12 @@ describe("ContactFormSection", () => {
   });
 
   test("shows error toast if fetch fails", async () => {
-    (fetch as jest.Mock).mockRejectedValueOnce(new Error("fail"));
+    (fetch as jest.Mock).mockRejectedValueOnce(
+      new Error("fail")
+    );
     createMock.mockReturnValueOnce("toast-id");
 
-    render(<ContactFormSection />);
+    renderWithProviders(<ContactFormSection />);
 
     fireEvent.change(screen.getByLabelText("Full Name"), {
       target: { value: "Bilal" },
@@ -162,11 +169,14 @@ describe("ContactFormSection", () => {
   });
 
   test("renders image with correct src", () => {
-    render(
+    renderWithProviders(
       <ContactFormSection image="/custom-image.jpg" />
     );
 
     const img = screen.getByAltText("Contact");
-    expect(img).toHaveAttribute("src", "/custom-image.jpg");
+    expect(img).toHaveAttribute(
+      "src",
+      "/custom-image.jpg"
+    );
   });
 });

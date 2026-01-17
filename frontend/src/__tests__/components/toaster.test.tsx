@@ -1,58 +1,62 @@
 import * as React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { act } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { renderWithProviders } from "../../test-utils";
-import TextAreaInput from "../../components/ui/TextAreaInput";
+import { renderWithProviders } from "../../../test-utils";
+import { Toaster, toaster } from "../../components/ui/toaster";
 
-describe("TextAreaInput", () => {
-  test("renders label and textarea", () => {
-    renderWithProviders(
-      <TextAreaInput
-        label="Description"
-        placeholder="Enter text"
-        value=""
-        onChange={() => {}}
-      />
-    );
+describe("Toaster", () => {
+  test("renders toaster region", () => {
+    renderWithProviders(<Toaster />);
 
-    expect(screen.getByText("Description")).toBeInTheDocument();
-    expect(
-      screen.getByPlaceholderText("Enter text")
-    ).toBeInTheDocument();
+    const region = document.querySelector('[role="region"]');
+    expect(region).toBeInTheDocument();
   });
 
-  test("shows provided value", () => {
-    renderWithProviders(
-      <TextAreaInput
-        label="Message"
-        placeholder="Type here"
-        value="Hello world"
-        onChange={() => {}}
-      />
-    );
+  test("creates a toast without crashing", () => {
+    renderWithProviders(<Toaster />);
 
-    expect(
-      screen.getByDisplayValue("Hello world")
-    ).toBeInTheDocument();
+    act(() => {
+      toaster.create({
+        title: "Success",
+        description: "Operation completed",
+        type: "success",
+      });
+    });
+
+    // Toast group should exist (proof toaster is wired correctly)
+    const group = document.querySelector('[data-scope="toast"]');
+    expect(group).toBeInTheDocument();
   });
 
-  test("calls onChange when typing", () => {
-    const handleChange = jest.fn();
+  test("supports loading toast", () => {
+    renderWithProviders(<Toaster />);
 
-    renderWithProviders(
-      <TextAreaInput
-        label="Comment"
-        placeholder="Write comment"
-        value=""
-        onChange={handleChange}
-      />
-    );
+    act(() => {
+      toaster.create({
+        title: "Loading",
+        type: "loading",
+      });
+    });
 
-    fireEvent.change(
-      screen.getByPlaceholderText("Write comment"),
-      { target: { value: "New text" } }
-    );
+    const group = document.querySelector('[data-scope="toast"]');
+    expect(group).toBeInTheDocument();
+  });
 
-    expect(handleChange).toHaveBeenCalled();
+  test("supports action & closable toast", () => {
+    renderWithProviders(<Toaster />);
+
+    act(() => {
+      toaster.create({
+        title: "Action toast",
+        action: {
+          label: "Undo",
+          onClick: jest.fn(),
+        },
+        closable: true,
+      });
+    });
+
+    const group = document.querySelector('[data-scope="toast"]');
+    expect(group).toBeInTheDocument();
   });
 });

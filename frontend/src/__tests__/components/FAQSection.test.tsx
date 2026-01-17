@@ -1,11 +1,11 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
+import { renderWithProviders } from "../../../test-utils";
 import FAQSection from "../../components/ui/FAQSection";
 
 /* ------------------------------------------------------------------ */
-/* 🔥 MOCK DATA (VERY IMPORTANT) */
+/* 🔥 MOCK DATA (SAFE) */
 /* ------------------------------------------------------------------ */
 jest.mock("../../../data", () => ({
   faqItems: [
@@ -22,30 +22,9 @@ jest.mock("../../../data", () => ({
   ],
 }));
 
-/* ------------------------------------------------------------------ */
-/* 🔥 MOCK CHAKRA ACCORDION (ONLY ONCE) */
-/* ------------------------------------------------------------------ */
-jest.mock("@chakra-ui/react", () => {
-  const actual = jest.requireActual("@chakra-ui/react");
-
-  return {
-    ...actual,
-    Accordion: {
-      Root: ({ children }: any) => <div>{children}</div>,
-      Item: ({ children }: any) => <div>{children}</div>,
-      ItemTrigger: ({ children }: any) => <button>{children}</button>,
-      ItemContent: ({ children }: any) => <div>{children}</div>,
-      ItemIndicator: () => <span data-testid="indicator" />,
-    },
-  };
-});
-
-/* ------------------------------------------------------------------ */
-/* ✅ TESTS */
-/* ------------------------------------------------------------------ */
 describe("FAQSection", () => {
   test("renders main heading", () => {
-    render(<FAQSection />);
+    renderWithProviders(<FAQSection />);
 
     expect(
       screen.getByRole("heading", {
@@ -55,7 +34,7 @@ describe("FAQSection", () => {
   });
 
   test("renders FAQ questions", () => {
-    render(<FAQSection />);
+    renderWithProviders(<FAQSection />);
 
     expect(
       screen.getByText("What is plant disease?")
@@ -67,7 +46,7 @@ describe("FAQSection", () => {
   });
 
   test("renders FAQ answers", () => {
-    render(<FAQSection />);
+    renderWithProviders(<FAQSection />);
 
     expect(
       screen.getByText("Plant disease is an abnormal condition.")
@@ -79,7 +58,7 @@ describe("FAQSection", () => {
   });
 
   test("renders side help box", () => {
-    render(<FAQSection />);
+    renderWithProviders(<FAQSection />);
 
     expect(
       screen.getByRole("heading", { name: /need more help/i })
@@ -91,7 +70,7 @@ describe("FAQSection", () => {
   });
 
   test("renders Go to Resources button", () => {
-    render(<FAQSection />);
+    renderWithProviders(<FAQSection />);
 
     expect(
       screen.getByRole("button", {

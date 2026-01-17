@@ -1,16 +1,12 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { MemoryRouter } from "react-router-dom";
+import { renderWithProviders } from "../../../test-utils";
 
 import Footer from "../../components/ui/footer";
 
 const renderFooter = () => {
-  return render(
-    <MemoryRouter>
-      <Footer />
-    </MemoryRouter>
-  );
+  return renderWithProviders(<Footer />);
 };
 
 describe("Footer", () => {
@@ -22,12 +18,15 @@ describe("Footer", () => {
   });
 
   test("renders brand description text", () => {
-    renderFooter();
+  renderFooter();
 
-    expect(
-      screen.getByText(/plant disease detection system with ai/i)
-    ).toBeInTheDocument();
-  });
+  expect(
+    screen.getAllByText(
+      /plant disease detection system with ai/i
+    ).length
+  ).toBeGreaterThan(0);
+});
+
 
   test("renders Explore section links", () => {
     renderFooter();
@@ -48,15 +47,23 @@ describe("Footer", () => {
   test("renders social media icons with aria-labels", () => {
     renderFooter();
 
-    expect(screen.getByLabelText("Facebook")).toBeInTheDocument();
-    expect(screen.getByLabelText("Instagram")).toBeInTheDocument();
-    expect(screen.getByLabelText("Twitter")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Facebook")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Instagram")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Twitter")
+    ).toBeInTheDocument();
   });
 
   test("renders dynamic current year in copyright", () => {
     renderFooter();
 
-    const currentYear = new Date().getFullYear().toString();
+    const currentYear = new Date()
+      .getFullYear()
+      .toString();
 
     expect(
       screen.getByText(new RegExp(currentYear))

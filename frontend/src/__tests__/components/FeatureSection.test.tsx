@@ -1,11 +1,12 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { renderWithProviders } from "../../../test-utils";
 
 import FeaturesSection from "../../components/ui/FeatureSection";
 
 /* ------------------------------------------------------------------ */
-/* 🔥 MOCK ICON (VERY IMPORTANT) */
+/* 🔥 MOCK ICON */
 /* ------------------------------------------------------------------ */
 const MockIcon = () => <svg data-testid="feature-icon" />;
 
@@ -38,7 +39,7 @@ const mockFeatures = [
 /* ------------------------------------------------------------------ */
 describe("FeaturesSection", () => {
   test("renders default heading", () => {
-    render(<FeaturesSection features={mockFeatures} />);
+    renderWithProviders(<FeaturesSection features={mockFeatures} />);
 
     expect(
       screen.getByRole("heading", { name: /our features/i })
@@ -46,7 +47,7 @@ describe("FeaturesSection", () => {
   });
 
   test("renders custom heading when provided", () => {
-    render(
+    renderWithProviders(
       <FeaturesSection
         heading="Why Choose Us"
         features={mockFeatures}
@@ -59,7 +60,7 @@ describe("FeaturesSection", () => {
   });
 
   test("renders all feature titles", () => {
-    render(<FeaturesSection features={mockFeatures} />);
+    renderWithProviders(<FeaturesSection features={mockFeatures} />);
 
     expect(screen.getByText("Fast Detection")).toBeInTheDocument();
     expect(screen.getByText("Accurate Results")).toBeInTheDocument();
@@ -67,7 +68,7 @@ describe("FeaturesSection", () => {
   });
 
   test("renders all feature descriptions", () => {
-    render(<FeaturesSection features={mockFeatures} />);
+    renderWithProviders(<FeaturesSection features={mockFeatures} />);
 
     expect(
       screen.getByText("Detect plant disease instantly")
@@ -83,7 +84,7 @@ describe("FeaturesSection", () => {
   });
 
   test("renders correct number of feature icons", () => {
-    render(<FeaturesSection features={mockFeatures} />);
+    renderWithProviders(<FeaturesSection features={mockFeatures} />);
 
     const icons = screen.getAllByTestId("feature-icon");
     expect(icons).toHaveLength(mockFeatures.length);

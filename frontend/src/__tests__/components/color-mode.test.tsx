@@ -1,6 +1,7 @@
 import * as React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { renderWithProviders } from "../../../test-utils";
 
 import {
   ColorModeProvider,
@@ -13,7 +14,7 @@ import {
 } from "../../components/ui/color-mode";
 
 /* ------------------------------------------------------------------ */
-/* 🔥 MOCK next-themes (MOST IMPORTANT PART) */
+/* 🔥 MOCK next-themes */
 /* ------------------------------------------------------------------ */
 jest.mock("next-themes", () => ({
   ThemeProvider: ({ children }: any) => <div>{children}</div>,
@@ -47,7 +48,7 @@ function TestUseColorModeValue() {
 /* ------------------------------------------------------------------ */
 describe("Color mode utilities", () => {
   test("ColorModeProvider renders children", () => {
-    render(
+    renderWithProviders(
       <ColorModeProvider>
         <div>App</div>
       </ColorModeProvider>
@@ -57,39 +58,37 @@ describe("Color mode utilities", () => {
   });
 
   test("useColorMode returns light mode by default", () => {
-    render(<TestUseColorMode />);
+    renderWithProviders(<TestUseColorMode />);
 
     expect(screen.getByTestId("mode")).toHaveTextContent("light");
   });
 
   test("useColorModeValue returns light value when theme is light", () => {
-    render(<TestUseColorModeValue />);
+    renderWithProviders(<TestUseColorModeValue />);
 
     expect(screen.getByText("LIGHT")).toBeInTheDocument();
   });
 
-  test("ColorModeIcon renders sun icon in light mode", () => {
-    render(<ColorModeIcon />);
+  test("ColorModeIcon renders icon", () => {
+    renderWithProviders(<ColorModeIcon />);
 
-    // react-icons render svg
     const svg = document.querySelector("svg");
     expect(svg).toBeInTheDocument();
   });
 
   test("ColorModeButton renders and is clickable", () => {
-    render(<ColorModeButton />);
+    renderWithProviders(<ColorModeButton />);
 
     const btn = screen.getByRole("button", {
       name: /toggle color mode/i,
     });
 
     expect(btn).toBeInTheDocument();
-
     fireEvent.click(btn);
   });
 
   test("LightMode renders children", () => {
-    render(
+    renderWithProviders(
       <LightMode>
         <span>Light Content</span>
       </LightMode>
@@ -99,7 +98,7 @@ describe("Color mode utilities", () => {
   });
 
   test("DarkMode renders children", () => {
-    render(
+    renderWithProviders(
       <DarkMode>
         <span>Dark Content</span>
       </DarkMode>

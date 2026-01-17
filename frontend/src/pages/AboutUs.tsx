@@ -44,9 +44,9 @@ export default function AboutUs() {
                 
             </Box>
 
-           <FeaturesSection
-        features={data.features}
-        />
+        <FeaturesSection
+  features={data?.features || []}
+/>
 
             <Box>
             <GetinTouch/>
