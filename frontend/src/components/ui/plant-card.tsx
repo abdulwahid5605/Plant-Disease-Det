@@ -173,18 +173,19 @@ const PlantCard = ({ post, isMyPost, onDelete, onEdit, onView }) => {
 
 
                         <Button
-                            size="sm"
-                            flex={1}
-                            bg="green.500"
-                            color="white"
-                            _hover={{ bg: "green.600" }}
-                            onClick={() =>
+                        size="sm"
+                        flex={1}
+                        bg="green.500"
+                        color="white"
+                        _hover={{ bg: "green.600" }}
+                        onClick={() =>
                             (window.location.href =
-                                "mailto:example@email.com?subject=Interested in Plant")
-                            }
+                            `mailto:${post.email}?subject=Interested in Plant&body=Hello, I am interested in your plant: ${post.title}`)
+                        }
                         >
-                            📩 Contact
+                        📩 Contact
                         </Button>
+
 
                     </Flex>
                 </VStack>
