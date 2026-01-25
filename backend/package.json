@@ -27,6 +27,7 @@
     "@nestjs/mongoose": "^11.0.3",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^10.0.0",
+    "axios": "^1.13.2",
     "bcrypt": "^6.0.0",
     "mongoose": "^8.19.2",
     "nodemailer": "^7.0.11",
